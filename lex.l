@@ -26,13 +26,13 @@ int             {return (INT);}
 double          {return (DOUBLE);}
 char            {return (CHAR);}
 bool            {return (BOOL);}
-{num}           {yyval.label = YYText(); return NUM;}
-{id}            {yyval.label = YYText(); return ID;}
-"=="            {yyval.label = YYText(); return RELOP;}
-"!="            {yyval.label = YYText(); return RELOP;}
-">"             {yyval.label = YYText(); return RELOP;}
-">="            {yyval.label = YYText(); return RELOP;}
-"<"             {yyval.label = YYText(); return RELOP;}
-"<="            {yyval.label = YYText(); return RELOP;}
+{num}           {yyval.label = YYText(); return (NUM);}
+{id}            {yyval.label = YYText(); return (ID);}
+"=="            {yyval.label = YYText(); return (RELOP);}
+"!="            {yyval.label = YYText(); return (RELOP);}
+">"             {yyval.label = YYText(); return (RELOP);}
+">="            {yyval.label = YYText(); return (RELOP);}
+"<"             {yyval.label = YYText(); return (RELOP);}
+"<="            {yyval.label = YYText(); return (RELOP);}
 .               cout << YYText() << "Token invalido!\n";
 %%
