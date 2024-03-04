@@ -22,7 +22,11 @@ void yyerror(const char *);
 %token DIGIT
 %token SEQ
 %token PAR
-
+%token STRING
+%token INT
+%token FLOAT
+%token BOOL
+%token CHAR
 
 %start programa_minipar
 
