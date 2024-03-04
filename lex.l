@@ -1,6 +1,8 @@
 %{
 #include <iostream>
-using std::cout;
+#include "sintatic.tab.h"
+using namespace std;
+    /* LT, LE, EQ, NE, GT, GE, IF, ELSE, WHILE, STRING, INT, DOUBLE, CHAR, ID, RELOP */
 %}
 
 %option noyywrap
@@ -10,23 +12,27 @@ letra [A-Za-z]
 digito [0-9]
 id {letra}({letra}|{digito})*
 int [+-]?({digito}+)
-double ({int}*\.{int}+)
+double ({int}+\.{int}+)
+num {int}|{double}
 
 %%
 {brancos}       ;
-[()]            return *yytext;
-if              return IF;
-else            return ELSE;
-while           return WHILE;
-string          return STRING;
-int             return INT;
-double          return DOUBLE;
-char            return CHAR;
-bool            return BOOL;
-{num}           {yyval.label = yytext; return NUM;}
-{id}            {yyval.label = yytext; return ID;}
-"=="            return OP;
-">="            return OP;
-"<="            return OP;
+[()]            {return YYText();}
+if              {return (IF);}
+else            {return (ELSE);}
+while           {return (WHILE);}
+string          {return (STRING);}
+int             {return (INT);}
+double          {return (DOUBLE);}
+char            {return (CHAR);}
+bool            {return (BOOL);}
+{num}           {yyval.label = YYText(); return NUM;}
+{id}            {yyval.label = YYText(); return ID;}
+"=="            {yyval.label = YYText(); return RELOP;}
+"!="            {yyval.label = YYText(); return RELOP;}
+">"             {yyval.label = YYText(); return RELOP;}
+">="            {yyval.label = YYText(); return RELOP;}
+"<"             {yyval.label = YYText(); return RELOP;}
+"<="            {yyval.label = YYText(); return RELOP;}
 .               cout << YYText() << "Token invalido!\n";
 %%
