@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <cctype>
 
 #define YYSTYPE atributos
 
@@ -12,19 +13,56 @@ struct atributos{
     string traducao;
 };
 
+int yyparse(void);
 int yylex(void);
-void yyerror(string);
+void yyerror(const char *);
 
 %}
 
-%token
-%token
-%token
-%token
+%token DIGIT
+%token SEQ
+%token PAR
 
-%start
+
+%start programa_minipar
 
 %%
+programa_minipar:   bloco_stmt          {;}
+                ;
+bloco_stmt:         bloco_seq           {;}
+          |         bloco_par           {;}
+          ;
+bloco_seq:          SEQ stmts           {;}
+         ;
+bloco_par:          PAR stmts           {;}
+         ;
+tipos_var:          STRING              {;}
+         |          INT                 {;}
+         |          FLOAT               {;}
+         |          BOOL                {;}
+         |          CHAR                {;}
+         ;
+atribuicao:         id '=' expr         {;}
+         ;
+expr:               termo mais_expr     {;}
+    ;
+mais_expr:   '+' termo mais_expr        {;}
+         |   '-' termo mais_expr        {;}
+         |
+         ;
+termo:   fator mais_termo               {;}
+     ;
+mais_termo:   '*' fator mais_termo      {;}
+          |   '/' fator mais_termo      {;}
+          |
+          ;
+fator:   DIGIT               {;}
+     | '(' expr ')'          {;}
+     ;
+c_chanel:
+stmts:
+cmd_a:
+cmd_na:
 
 
 %%

@@ -36,3 +36,11 @@ bool            {return (BOOL);}
 "<="            {yyval.label = YYText(); return (RELOP);}
 .               cout << YYText() << "Token invalido!\n";
 %%
+
+inserir_id(){
+
+}
+
+inserir_num(){
+
+}
