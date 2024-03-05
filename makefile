@@ -1,10 +1,13 @@
-all: lexic sintatic compi
+all: bigT
 
-lexic:
+bigT:	lex.yy.c bigT.tab.c 
+	g++ lex.yy.c bigT.tab.c -std=c++17 -o bigT
+
+lex.yy.c:	lex.l
 	flex lex.l
 
-sintatic:
+bigT.tab.c:	sint.y
 	bison -d sint.y
 
-compi:
-	g++ -o minipar sintatic.tab.cpp lex.yy.cpp -lfl
+clean:
+	rm bigT lex.yy.c bigT.tab.c bigT.tab.h

@@ -31,8 +31,9 @@ void yyerror(const char *);
 %start programa_minipar
 
 %%
-programa_minipar:   bloco_stmt          {;}
-                ;
+programa_minipar:   bloco_stmt          {
+
+;};
 bloco_stmt:         bloco_seq           {;}
           |         bloco_par           {;}
           ;
