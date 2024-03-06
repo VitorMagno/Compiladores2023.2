@@ -26,7 +26,7 @@ else            {return (ELSE);}
 while           {return (WHILE);}
 {string}        {yylval.num = yytext; return (STRING);}
 {int}           {yylval.num = atoi(yytext); return (INT);}
-{float}         {yylval.num = atof(yytext); return (float);}
+{float}         {yylval.num = atof(yytext); return (FLOAT);}
 {letra}         {yylval.num = yytext; return (CHAR);}
 {bool}          {yylval.num = yytext; return (BOOL);}
 {id}            {strcopy(yylval.id, yytext); return (ID);}

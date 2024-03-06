@@ -28,9 +28,12 @@ unordered_map<string, float> variables;
 %token <id> ID_COMP1
 %token <id> ID_COMP2
 %token <id> CHAN
-%token <flutuante><inteiro> DIGIT
+%token <inteiro> INTDIGIT
+%token <flutuante> FLOATDIGIT
+%token <palavra> STRINGDIGIT
+%token <caracter> CHARDIGIT
 %token <inteiro> INT
-%token <flutuante> DOUBLE
+%token <flutuante> FLOAT
 %token <palavra> STRING
 %token <boolean> BOOL
 %token <caracter> CHAR
@@ -51,7 +54,7 @@ bloco_par: PAR stmts            {;}
          ;
 tipos_var: STRING               {;}
          | INT                  {;}
-         | DOUBLE                {;}
+         | FLOAT                {;}
          | BOOL                 {;}
          | CHAR                 {;}
          ;
@@ -94,7 +97,7 @@ mais_termo: '*' fator mais_termo            {$$ = $$ * $2;}
           };}
           |
           ;
-fator: DIGIT                        
+fator: INTDIGIT | FLOATDIGIT | CHARDIGIT | STRINGDIGIT                        
      {if(variables.find($1) != unordered_map::end){
          $$ = variables[$1]
      }else{
