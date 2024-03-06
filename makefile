@@ -1,4 +1,4 @@
-all: bigT
+all:	bigT
 
 bigT:	lex.yy.c bigT.tab.c 
 	g++ lex.yy.c bigT.tab.c -std=c++17 -o bigT
