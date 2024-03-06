@@ -1,46 +1,41 @@
 %{
 #include <iostream>
-#include "sintatic.tab.h"
-using namespace std;
-    /* LT, LE, EQ, NE, GT, GE, IF, ELSE, WHILE, STRING, INT, DOUBLE, CHAR, ID, RELOP */
+#include "bigT.tab.h"
+extern float variables[100];
 %}
 
 %option noyywrap
+%option yylineno
+
 delim [ \t\n]
 brancos {delim}+
-letra [A-Za-z]
+letra [A-Za-z_]
 digito [0-9]
+string [{letra}+{digito}*]
 id {letra}({letra}|{digito})*
 int [+-]?({digito}+)
-double ({int}+\.{int}+)
-num {int}|{double}
+float ({int}+\.{int}+)
+bool ["true"|"false"]
 
 %%
+
 {brancos}       ;
-[()]            {return YYText();}
+[(|)]           {return yytext;}
 if              {return (IF);}
 else            {return (ELSE);}
 while           {return (WHILE);}
-string          {return (STRING);}
-int             {return (INT);}
-double          {return (DOUBLE);}
-char            {return (CHAR);}
-bool            {return (BOOL);}
-{num}           {yyval.label = YYText(); return (NUM);}
-{id}            {yyval.label = YYText(); return (ID);}
-"=="            {yyval.label = YYText(); return (RELOP);}
-"!="            {yyval.label = YYText(); return (RELOP);}
-">"             {yyval.label = YYText(); return (RELOP);}
-">="            {yyval.label = YYText(); return (RELOP);}
-"<"             {yyval.label = YYText(); return (RELOP);}
-"<="            {yyval.label = YYText(); return (RELOP);}
-.               cout << YYText() << "Token invalido!\n";
+{string}        {yylval.num = yytext; return (STRING);}
+{int}           {yylval.num = atoi(yytext); return (INT);}
+{float}         {yylval.num = atof(yytext); return (float);}
+{letra}         {yylval.num = yytext; return (CHAR);}
+{bool}          {yylval.num = yytext; return (BOOL);}
+{id}            {strcopy(yylval.id, yytext); return (ID);}
+"=="            {yylval = yytext; return (EQ);}
+"!="            {yylval = yytext; return (NE);}
+">"             {yylval = yytext; return (GT);}
+">="            {yylval = yytext; return (GE);}
+"<"             {yylval = yytext; return (LT);}
+"<="            {yylval = yytext; return (LE);}
+.               cout << yytext << "Token invalido!\n";
+
 %%
-
-inserir_id(){
-
-}
-
-inserir_num(){
-
-}
