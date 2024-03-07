@@ -28,7 +28,7 @@ while           {return (WHILE);}
 {int}           {yylval.inteiro = atoi(yytext); return (INT);}
 {float}         {yylval.flutuante = atof(yytext); return (FLOAT);}
 {letra}         {yylval.letra = yytext; return (CHAR);}
-{bool}          {yylval.bolean = yytext; return (BOOL);}
+{bool}          {yylval.boolean = yytext; return (BOOL);}
 {id}            {strcopy(yylval.id, yytext); return (ID);}
 "=="            {yylval = yytext; return EQ;}
 "!="            {yylval = yytext; return NE;}
