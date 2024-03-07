@@ -20,22 +20,22 @@ bool ["true"|"false"]
 %%
 
 {brancos}       ;
-[(|)]           {return yytext;}
+[()]            {return yytext;}
 if              {return (IF);}
 else            {return (ELSE);}
 while           {return (WHILE);}
-{string}        {yylval.num = yytext; return (STRING);}
-{int}           {yylval.num = atoi(yytext); return (INT);}
-{float}         {yylval.num = atof(yytext); return (FLOAT);}
-{letra}         {yylval.num = yytext; return (CHAR);}
-{bool}          {yylval.num = yytext; return (BOOL);}
+{string}        {yylval.palavra = yytext; return (STRING);}
+{int}           {yylval.inteiro = atoi(yytext); return (INT);}
+{float}         {yylval.flutuante = atof(yytext); return (FLOAT);}
+{letra}         {yylval.letra = yytext; return (CHAR);}
+{bool}          {yylval.bolean = yytext; return (BOOL);}
 {id}            {strcopy(yylval.id, yytext); return (ID);}
-"=="            {yylval = yytext; return (EQ);}
-"!="            {yylval = yytext; return (NE);}
-">"             {yylval = yytext; return (GT);}
-">="            {yylval = yytext; return (GE);}
-"<"             {yylval = yytext; return (LT);}
-"<="            {yylval = yytext; return (LE);}
+"=="            {yylval = yytext; return EQ;}
+"!="            {yylval = yytext; return NE;}
+">="            {yylval = yytext; return GE;}
+"<="            {yylval = yytext; return LE;}
+">"             {yylval = yytext;}
+"<"             {yylval = yytext;}
 .               cout << yytext << "Token invalido!\n";
 
 %%
