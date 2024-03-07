@@ -23,7 +23,7 @@ unordered_map<string, float> variables;
     char caracter;
 }
 
-%token SEQ PAR IF ELSE WHILE
+%token SEQ PAR IF ELSE WHILE GE LE NE EQ
 %token <id> ID
 %token <id> ID_COMP1
 %token <id> ID_COMP2
@@ -40,7 +40,7 @@ unordered_map<string, float> variables;
 
 %start programa_minipar
 
-%type 
+%type <inteiro> bloco_seq bloco_par cmd_a cmd_na tipos_var expr mais_expr termo mais_termo fator
 
 %%
 programa_minipar: bloco_stmt    {;}
@@ -48,15 +48,15 @@ programa_minipar: bloco_stmt    {;}
 bloco_stmt: bloco_seq           {;}
           | bloco_par           {;}
           ;
-bloco_seq: SEQ stmts            {;}
+bloco_seq: SEQ stmts            {$$=$2;}
          ;
-bloco_par: PAR stmts            {;}
+bloco_par: PAR stmts            {;} /*falta*/
          ;
-tipos_var: STRING               {;}
-         | INT                  {;}
-         | FLOAT                {;}
-         | BOOL                 {;}
-         | CHAR                 {;}
+tipos_var: STRING               {$$ = string;}
+         | INT                  {$$ = int;}
+         | FLOAT                {$$ = float;}
+         | BOOL                 {$$ = bool;}
+         | CHAR                 {$$ = char;}
          ;
 c_chanel: CHAN ID ID_COMP1 ID_COMP2 {;}; /*falta*/
 stmts: atribuicao                   {;}
@@ -65,35 +65,36 @@ stmts: atribuicao                   {;}
 stmt: cmd_a                         {;}
     | cmd_na                        {;}
     ;
-cmd_a: IF '(' BOOL ')' cmd_a ELSE cmd_a     {;} /*falta*/
-     | WHILE '(' BOOL ')' stmt              {;} /*falta*/
+cmd_a: IF '(' bool ')' cmd_a ELSE cmd_a     {if($3){$$=$5}else{$$=$7};} 
+     | WHILE '(' bool ')' stmt              {while($3){$$=$5};} 
      ;
-cmd_na: IF '(' bool ')' stmt                {;} /*falta*/
-      | IF '(' bool ')' cmd_a ELSE cmd_na   {;} /*falta*/
+cmd_na: IF '(' bool ')' stmt                {if($3){$$=$5};} 
+      | IF '(' bool ')' cmd_a ELSE cmd_na   {if($3){$$=$5}else{$$=$7};} 
       ;
-bool: ID '=''=' ID                          {;} /*falta*/
-    | ID '!''=' ID                          {;} /*falta*/
-    | ID '>' ID                             {;} /*falta*/
-    | ID '>''=' ID                          {;} /*falta*/
-    | ID '<' ID                             {;} /*falta*/
-    | ID '<''=' ID                          {;} /*falta*/
+bool: expr
     ;
-atribuicao: ID '=' expr                     {variables[$1] = $3;}
+atribuicao: tipos_var ID '=' expr                     {variables[$1] = $3;}
          ;
 expr: termo mais_expr                       {$$ = $1;}
     ;
-mais_expr: '+' termo mais_expr              {$$ = $$ + $2;}
-         | '-' termo mais_expr              {$$ = $$ - $2;}
+mais_expr: '+' termo mais_expr              {$$ = $-1 + $2;}
+         | '-' termo mais_expr              {$$ = $-1 - $2;}
+         | GE termo mais_expr               {$$ = $-1 >= $2;}
+         | LE termo mais_expr               {$$ = $-1 <= $2;}
+         | NE termo mais_expr               {$$ = $-1 != $2;}
+         | EQ termo mais_expr               {$$ = $-1 == $2;}
+         | '>' termo mais_expr              {$$ = $-1 > $2;}
+         | '<' termo mais_expr              {$$ = $-1 < $2;}
          |
          ;
 termo:   fator mais_termo                   {$$ = $1;}
      ;
-mais_termo: '*' fator mais_termo            {$$ = $$ * $2;}
+mais_termo: '*' fator mais_termo            {$$ = $-1 * $2;}
           | '/' fator mais_termo    
           {if($2==0){
             yyerror("divisao por zero")
           }else{
-            $$ = $$ / $2
+            $$ = $-1 / $2
           };}
           |
           ;
@@ -117,5 +118,5 @@ void yyerror(const char * s){
     extern int yylineno;
     extern char *yytext;
 
-    cout<<"ERRO: "<<s<<" secao \"" << yytext << "\" linha "<< yylineno <<'\n';
+    cout << "ERRO: " << s << " secao \"" << yytext << "\" linha " << yylineno << '\n';
 }

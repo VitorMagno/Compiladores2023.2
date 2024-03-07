@@ -30,10 +30,10 @@ while           {return (WHILE);}
 {letra}         {yylval.letra = yytext; return (CHAR);}
 {bool}          {yylval.boolean = yytext; return (BOOL);}
 {id}            {strcopy(yylval.id, yytext); return (ID);}
-"=="            {yylval = yytext; return EQ;}
-"!="            {yylval = yytext; return NE;}
-">="            {yylval = yytext; return GE;}
-"<="            {yylval = yytext; return LE;}
+"=="            {return EQ;}
+"!="            {return NE;}
+">="            {return GE;}
+"<="            {return LE;}
 ">"             {yylval = yytext;}
 "<"             {yylval = yytext;}
 .               cout << yytext << "Token invalido!\n";
