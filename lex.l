@@ -1,7 +1,6 @@
 %{
 #include <iostream>
 #include "bigT.tab.h"
-extern float variables[100];
 %}
 
 %option noyywrap
