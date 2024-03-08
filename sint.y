@@ -38,37 +38,25 @@ void set_value(string var_name, double value) {
 %}
 
 %union {
-    std::string palavra;
     int inteiro;
     float flutuante;
-    char id[30];
-    bool boolean;
-    char caracter;
+    char id[26];
+    bool booleano;
+    string palavra;
 };
 
-%token SEQ PAR IF ELSE WHILE GE LE NE EQ AND OR NOT
+%token SEQ PAR IF ELSE WHILE GE LE NE EQ AND OR NOT TRUE FALSE
 %token <id> ID
 %token <id> ID_COMP1
 %token <id> ID_COMP2
 %token <id> CHAN 
 %token <inteiro> INTDIGIT
-%token <flutuante> FLOATDIGIT
-%token <palavra> STRINGDIGIT
-%token <inteiro> INT
-%token <flutuante> FLOAT
-%token <palavra> STRING
-%token <boolean> TRUE FALSE
-%token <caracter> CHAR
-%token <boolean> BOOL
 
 %start programa_minipar
 %type <id> c_chanel
-%type <caracter> tipos_varChar 
-%type <boolean> tipos_varBool atribuicaoBool fatorBool exprBool bool stmtsBool
-%type <flutuante> tipos_varFloat atribuicaoFloat fatorFloat exprFloat cmd_a cmd_na stmt stmtsFloat bloco_seqFloat bloco_parFloat
-%type <inteiro> tipos_varInt exprInt fatorInt atribuicaoInt 
-%type <palavra> programa_minipar tipos_varString atribuicaoString fatorString exprString stmtsString bloco_stmt bloco_seqString bloco_parString
-
+%type <inteiro> tipos_var expr fator atribuicao cmd_a cmd_na stmts bloco_seq bloco_par stmt
+%type <booleano> bool
+%type <palavra> bloco_stmt
 %left '+''-'
 %left '*''/'
 %left EQ NE '>' '<' GE LE
@@ -79,39 +67,19 @@ void set_value(string var_name, double value) {
 %%
 programa_minipar: bloco_stmt    {cout << $1 << '\n';}
                 ;
-bloco_stmt: bloco_seqFloat      {$$ = toString($1);}
-          | bloco_seqString          
-          | bloco_parFloat      {$$ = toString($1);}
-          | bloco_parString
+bloco_stmt: bloco_seq      {$$ = toString($1);}          
+          | bloco_par      {$$ = toString($1);}
           ;
-bloco_seqFloat: SEQ stmtsFloat            {$$=$2;}
-              ;
-bloco_seqString: SEQ stmtsString           {$$=$2;}
-         | SEQ stmtsBool             {$$=$2;}   
-         ;
-bloco_parFloat: PAR stmtsFloat            {;} /*falta*/
+bloco_seq: SEQ stmts            {$$=$2;}
+        ;
+bloco_par: PAR stmts            {;} /*falta*/
             ;
-bloco_parString:PAR stmtsString           {;}
-         | PAR stmtsBool             {;}
-         ;
-tipos_varString: STRING               {$$=$1}
-               ;
-tipos_varInt: INT                  {$$=$1}
-            ;
-tipos_varFloat: FLOAT                {$$=$1}
-              ;
-tipos_varBool: BOOL                 {$$=$1}
-             ;
-tipos_varChar: CHAR                 {$$=$1}
-             ;
+tipos_var: INTDIGIT                  {$$=$1}
+        ;
 c_chanel: CHAN ID ID_COMP1 ID_COMP2 {;}; /*falta*/
-stmtsFloat: atribuicaoInt                   {$$=$1;}
-        | atribuicaoFloat                   {$$=$1;}
-        | stmt        
-stmtsString: atribuicaoString                   {$$=$1;}
-            ;
-stmtsBool: atribuicaoBool                   {$$=$1;}                       
-     ;
+stmts: atribuicao                   {$$=$1;}
+    | stmt
+    ;        
 stmt: cmd_a                         
     | cmd_na                        
     ;
@@ -121,64 +89,31 @@ cmd_a: IF '(' bool ')' cmd_a ELSE cmd_a     {if($3) $$=$5; else $$=$$;}
 cmd_na: IF '(' bool ')' stmt                {if($3) $$=$5 ;} 
       | IF '(' bool ')' cmd_a ELSE cmd_na   {if($3) $$=$5 else{$$=$$};} 
       ;
-bool:  exprInt EQ exprInt                         { if($1 == $3)$$ = true; else{$$ = false};}
-       | exprInt NE exprInt                       { if($1 != $3)$$ = true; else{$$ = false} }
-       | exprInt '>' exprInt                      { if($1 > $3)$$ = true; else{$$ = false}}
-       | exprInt '<' exprInt                      {if($1 < $3)$$ = true; else{$$ = false}}
-       | exprInt GE exprInt                       { if($1 >= $3)$$ = true; else{$$ = false}}
-       | exprInt LE exprInt                       { if($1 <= $3)$$ = true; else{$$ = false} }
-       | exprFloat EQ exprFloat                         { if($1 == $3)$$ = true; else{$$ = false};}
-       | exprFloat NE exprFloat                       { if($1 != $3)$$ = true; else{$$ = false} }
-       | exprFloat '>' exprFloat                      { if($1 > $3)$$ = true; else{$$ = false}}
-       | exprFloat '<' exprFloat                      {if($1 < $3)$$ = true; else{$$ = false}}
-       | exprFloat GE exprFloat                       { if($1 >= $3)$$ = true; else{$$ = false}}
-       | exprFloat LE exprFloat                       { if($1 <= $3)$$ = true; else{$$ = false} }
-       | bool AND bool                      {if($1 == false || $3 == false)$$ = false; else{$$ = true}}
-       | bool OR bool                       {if($1 == true || $3 == true)$$ = true; else{$$ = false}}
-       | NOT bool                           { if($2 == true)$$ = false; else{$$ = true}}
-       | TRUE                               { $$ = true; }
-       | FALSE                              { $$ = false; }
-        ;
-atribuicaoString: tipos_varString ID '=' exprString           {set_value($2, $4); $$ = $4}
+bool:  expr EQ expr                      { if($1 == $3)$$ = true; else{$$ = false};}
+    |  expr NE expr                      { if($1 != $3)$$ = true; else{$$ = false} }
+    |  expr '>' expr                     { if($1 > $3)$$ = true; else{$$ = false}}
+    |  expr '<' expr                     {if($1 < $3)$$ = true; else{$$ = false}}
+    |  expr GE expr                      { if($1 >= $3)$$ = true; else{$$ = false}}
+    |  expr LE expr                      { if($1 <= $3)$$ = true; else{$$ = false} }
+    | bool AND bool                      {if($1 == false || $3 == false)$$ = false; else{$$ = true}}
+    | bool OR bool                       {if($1 == true || $3 == true)$$ = true; else{$$ = false}}
+    | NOT bool                           { if($2 == true)$$ = false; else{$$ = true}}
+    | TRUE                               { $$ = true; }
+    | FALSE                              { $$ = false; }
+    ;
+atribuicao: tipos_var ID '=' expr           {set_value($2, $4); $$ = $4}
           ;
-atribuicaoInt: tipos_varInt ID '=' exprInt           {set_value($2, $4); $$ = $4}
-          ;
-atribuicaoFloat: tipos_varFloat ID '=' exprFloat           {set_value($2, $4); $$ = $4}
-          ;
-atribuicaoBool: tipos_varBool ID '=' exprBool           {set_value($2, $4); $$ = $4}
-          ;
-exprInt: fatorInt
+expr: fator
     | ID                                    {$$ = get_value($1);}
-    | exprInt '+' exprInt                         {$$ = $1 + $3;}
-    | exprInt '-' exprInt                         {$$ = $1 + $3;}
-    | exprInt '/' exprInt                         {$$ = $1 / $3;}
-    | exprInt '*' exprInt                         {$$ = $1 * $3;}
+    | expr '+' expr                         {$$ = $1 + $3;}
+    | expr '-' expr                         {$$ = $1 + $3;}
+    | expr '/' expr                         {$$ = $1 / $3;}
+    | expr '*' expr                         {$$ = $1 * $3;}
     ;
-exprFloat: fatorFloat
-    | ID                                             {$$ = get_value($1);}
-    | exprFloat '+' exprFloat                        {$$ = $1 + $3;}
-    | exprFloat '-' exprFloat                         {$$ = $1 + $3;}
-    | exprFloat '/' exprFloat                         {$$ = $1 / $3;}
-    | exprFloat '*' exprFloat                         {$$ = $1 * $3;}
-    ;
-exprString: ID                                             {$$ = get_value($1);}
-        | fatorString
-        ;
-exprBool: ID                                             {$$ = get_value($1);}
-        | fatorBool
-        ;
-fatorFloat: FLOATDIGIT  {$$ = $1;}
-     | '(' exprFloat ')'     {$$ = $2;}
+
+fator: INTDIGIT           {$$ = $1;}
+     |'(' expr ')'     {$$ = $2;}
      ;
-fatorInt: INTDIGIT  {$$ = $1;}
-     |'(' exprInt ')'     {$$ = $2;}
-     ;
-fatorString: STRINGDIGIT | CHAR {$$ = $1;}
-    |'(' exprString ')'     {$$ = $2;}
-     ;
-fatorBool: BOOL {$$ = $1;}
-        | '(' exprBool ')'     {$$ = $2;}
-        ;
 %%
 
 #include "lex.yy.c"

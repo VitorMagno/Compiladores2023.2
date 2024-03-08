@@ -66,20 +66,13 @@ extern int yydebug;
     AND = 267,                     /* AND  */
     OR = 268,                      /* OR  */
     NOT = 269,                     /* NOT  */
-    ID = 270,                      /* ID  */
-    ID_COMP1 = 271,                /* ID_COMP1  */
-    ID_COMP2 = 272,                /* ID_COMP2  */
-    CHAN = 273,                    /* CHAN  */
-    INTDIGIT = 274,                /* INTDIGIT  */
-    FLOATDIGIT = 275,              /* FLOATDIGIT  */
-    STRINGDIGIT = 276,             /* STRINGDIGIT  */
-    INT = 277,                     /* INT  */
-    FLOAT = 278,                   /* FLOAT  */
-    STRING = 279,                  /* STRING  */
-    TRUE = 280,                    /* TRUE  */
-    FALSE = 281,                   /* FALSE  */
-    CHAR = 282,                    /* CHAR  */
-    BOOL = 283                     /* BOOL  */
+    TRUE = 270,                    /* TRUE  */
+    FALSE = 271,                   /* FALSE  */
+    ID = 272,                      /* ID  */
+    ID_COMP1 = 273,                /* ID_COMP1  */
+    ID_COMP2 = 274,                /* ID_COMP2  */
+    CHAN = 275,                    /* CHAN  */
+    INTDIGIT = 276                 /* INTDIGIT  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -90,14 +83,13 @@ union YYSTYPE
 {
 #line 40 "sint.y"
 
-    std::string palavra;
     int inteiro;
     float flutuante;
-    char id[30];
-    bool boolean;
-    char caracter;
+    char id[26];
+    bool booleano;
+    string palavra;
 
-#line 101 "sint.tab.h"
+#line 93 "sint.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
