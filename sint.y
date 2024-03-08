@@ -117,14 +117,15 @@ fator: INTDIGIT           {$$ = $1;}
 %%
 
 #include "lex.yy.c"
+using namespace std;
 
 int main(){
-    yy.parse();
+    yyparse();
 }
 
 void yyerror(const char * s){
     extern int yylineno;
     extern char *yytext;
 
-    cout << "ERRO: " << s << " secao \"" << yytext << "\" linha " << yylineno << '\n';
+    cout << "ERRO: " << s << " secao \"" << *yytext << "\" linha " << yylineno << '\n';
 }

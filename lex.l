@@ -1,5 +1,5 @@
 %{
-#include <iostream>
+#include <stdio.h>
 #include "sint.tab.h"
 %}
 
@@ -21,13 +21,13 @@ if              {return (IF);}
 else            {return (ELSE);}
 while           {return (WHILE);}
 {int}           {yylval.inteiro = atoi(yytext); return (INT);}
-{id}            {strcopy(yylval.id, yytext); return (ID);}
+{id}            {yylval.id = *yytext; return (ID);}
 "=="            {return EQ;}
 "!="            {return NE;}
 ">="            {return GE;}
 "<="            {return LE;}
-">"             {yylval = yytext;}
-"<"             {yylval = yytext;}
-.               cout << yytext << "Token invalido!\n";
+">"             {return *yytext;}
+"<"             {return *yytext;}
+.               printf("Token %d invalido", *yytext);
 
 %%

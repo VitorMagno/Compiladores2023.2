@@ -485,7 +485,7 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "lex.l"
 #line 2 "lex.l"
-#include <iostream>
+#include <stdio.h>
 #include "sint.tab.h"
 #line 491 "lex.yy.c"
 #line 492 "lex.yy.c"
@@ -809,7 +809,7 @@ YY_RULE_SETUP
 case 7:
 YY_RULE_SETUP
 #line 24 "lex.l"
-{strcopy(yylval.id, yytext); return (ID);}
+{yylval.id = *yytext; return (ID);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
@@ -834,17 +834,17 @@ YY_RULE_SETUP
 case 12:
 YY_RULE_SETUP
 #line 29 "lex.l"
-{yylval = yytext;}
+{return *yytext;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 30 "lex.l"
-{yylval = yytext;}
+{return *yytext;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 31 "lex.l"
-cout << yytext << "Token invalido!\n";
+printf("Token %d invalido", *yytext);
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
