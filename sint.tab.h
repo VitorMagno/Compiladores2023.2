@@ -81,7 +81,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 40 "sint.y"
+#line 42 "sint.y"
 
     int inteiro;
     float flutuante;

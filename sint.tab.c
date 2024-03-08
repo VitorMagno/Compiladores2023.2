@@ -75,6 +75,8 @@
 #include <cstdlib>
 using namespace std;
 
+extern YYSTYPE yylval;
+
 int yylex(void);
 int yyparse(void);
 void yyerror(const char *);
@@ -106,7 +108,7 @@ void set_value(string var_name, double value) {
     variables[var_name] = value;
 }
 
-#line 110 "sint.tab.c"
+#line 112 "sint.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -562,8 +564,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    68,    68,    70,    71,    73,    75,    77,    80,   104,
-     106,   107,   108,   109,   110,   111,   114,   115
+       0,    70,    70,    72,    73,    75,    77,    79,    82,   106,
+     108,   109,   110,   111,   112,   113,   116,   117
 };
 #endif
 
@@ -1136,97 +1138,97 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* programa_minipar: bloco_stmt  */
-#line 68 "sint.y"
+#line 70 "sint.y"
                                 {cout << (yyvsp[0].palavra) << '\n';}
-#line 1142 "sint.tab.c"
+#line 1144 "sint.tab.c"
     break;
 
   case 3: /* bloco_stmt: bloco_seq  */
-#line 70 "sint.y"
+#line 72 "sint.y"
                            {(yyval.palavra) = toString((yyvsp[0].inteiro));}
-#line 1148 "sint.tab.c"
+#line 1150 "sint.tab.c"
     break;
 
   case 4: /* bloco_stmt: bloco_par  */
-#line 71 "sint.y"
+#line 73 "sint.y"
                            {(yyval.palavra) = toString((yyvsp[0].inteiro));}
-#line 1154 "sint.tab.c"
+#line 1156 "sint.tab.c"
     break;
 
   case 5: /* bloco_seq: SEQ stmts  */
-#line 73 "sint.y"
+#line 75 "sint.y"
                                 {(yyval.inteiro)=(yyvsp[0].inteiro);}
-#line 1160 "sint.tab.c"
+#line 1162 "sint.tab.c"
     break;
 
   case 6: /* bloco_par: PAR stmts  */
-#line 75 "sint.y"
+#line 77 "sint.y"
                                 {;}
-#line 1166 "sint.tab.c"
+#line 1168 "sint.tab.c"
     break;
 
   case 7: /* tipos_var: INTDIGIT  */
-#line 77 "sint.y"
+#line 79 "sint.y"
                                      {(yyval.inteiro)=(yyvsp[0].inteiro)}
-#line 1172 "sint.tab.c"
+#line 1174 "sint.tab.c"
     break;
 
   case 8: /* stmts: atribuicao  */
-#line 80 "sint.y"
+#line 82 "sint.y"
                                     {(yyval.inteiro)=(yyvsp[0].inteiro);}
-#line 1178 "sint.tab.c"
+#line 1180 "sint.tab.c"
     break;
 
   case 9: /* atribuicao: tipos_var ID '=' expr  */
-#line 104 "sint.y"
+#line 106 "sint.y"
                                             {set_value((yyvsp[-2].id), (yyvsp[0].inteiro)); (yyval.inteiro) = (yyvsp[0].inteiro)}
-#line 1184 "sint.tab.c"
+#line 1186 "sint.tab.c"
     break;
 
   case 11: /* expr: ID  */
-#line 107 "sint.y"
+#line 109 "sint.y"
                                             {(yyval.inteiro) = get_value((yyvsp[0].id));}
-#line 1190 "sint.tab.c"
+#line 1192 "sint.tab.c"
     break;
 
   case 12: /* expr: expr '+' expr  */
-#line 108 "sint.y"
+#line 110 "sint.y"
                                             {(yyval.inteiro) = (yyvsp[-2].inteiro) + (yyvsp[0].inteiro);}
-#line 1196 "sint.tab.c"
+#line 1198 "sint.tab.c"
     break;
 
   case 13: /* expr: expr '-' expr  */
-#line 109 "sint.y"
+#line 111 "sint.y"
                                             {(yyval.inteiro) = (yyvsp[-2].inteiro) + (yyvsp[0].inteiro);}
-#line 1202 "sint.tab.c"
+#line 1204 "sint.tab.c"
     break;
 
   case 14: /* expr: expr '/' expr  */
-#line 110 "sint.y"
+#line 112 "sint.y"
                                             {(yyval.inteiro) = (yyvsp[-2].inteiro) / (yyvsp[0].inteiro);}
-#line 1208 "sint.tab.c"
+#line 1210 "sint.tab.c"
     break;
 
   case 15: /* expr: expr '*' expr  */
-#line 111 "sint.y"
+#line 113 "sint.y"
                                             {(yyval.inteiro) = (yyvsp[-2].inteiro) * (yyvsp[0].inteiro);}
-#line 1214 "sint.tab.c"
+#line 1216 "sint.tab.c"
     break;
 
   case 16: /* fator: INTDIGIT  */
-#line 114 "sint.y"
+#line 116 "sint.y"
                           {(yyval.inteiro) = (yyvsp[0].inteiro);}
-#line 1220 "sint.tab.c"
+#line 1222 "sint.tab.c"
     break;
 
   case 17: /* fator: '(' expr ')'  */
-#line 115 "sint.y"
+#line 117 "sint.y"
                        {(yyval.inteiro) = (yyvsp[-1].inteiro);}
-#line 1226 "sint.tab.c"
+#line 1228 "sint.tab.c"
     break;
 
 
-#line 1230 "sint.tab.c"
+#line 1232 "sint.tab.c"
 
       default: break;
     }
@@ -1419,7 +1421,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 117 "sint.y"
+#line 119 "sint.y"
 
 
 #include "lex.yy.c"

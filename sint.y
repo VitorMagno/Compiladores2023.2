@@ -5,6 +5,8 @@
 #include <cstdlib>
 using namespace std;
 
+extern YYSTYPE yylval;
+
 int yylex(void);
 int yyparse(void);
 void yyerror(const char *);
