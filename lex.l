@@ -1,6 +1,6 @@
 %{
 #include <iostream>
-#include "bigT.tab.h"
+#include "sint.tab.h"
 %}
 
 %option noyywrap

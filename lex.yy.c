@@ -497,7 +497,7 @@ char *yytext;
 #line 1 "lex.l"
 #line 2 "lex.l"
 #include <iostream>
-#include "bigT.tab.h"
+#include "sint.tab.h"
 #line 502 "lex.yy.c"
 #line 503 "lex.yy.c"
 
