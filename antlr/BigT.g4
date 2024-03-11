@@ -35,7 +35,9 @@ termo:          fator mais_termo;
 mais_termo:     (MUL|DIV) fator mais_termo
           |
           ;
-fator:          DIGIT | '(' expr ')';
+fator:    DIGIT 
+    | '(' expr ')'
+    ;
 c_chanel:       CHAN ID ID_COMP1 ID_COMP2;
 
 // parser rules start with lowercase letters, lexer rules with uppercase
