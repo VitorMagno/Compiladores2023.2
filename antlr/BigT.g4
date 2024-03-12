@@ -1,42 +1,46 @@
 grammar BigT;		
 
-progama_minipar:	bloco_stmt EOF
+progama_minipar:	bloco_stmt
                 ;
 bloco_stmt:     bloco_seq 
         |       bloco_par
         ;
-bloco_seq:      SEQ stmts;
-bloco_par:      PAR stmts;
+bloco_seq:      'SEQ' stmts;
+bloco_par:      'PAR' stmts;
 stmts:          atribuicao 
     |           stmt
     ;
 stmt:           cmd_a 
     |           cmd_na
     ;
-cmd_a:          IF '(' bool ')' cmd_a ELSE cmd_a 
-    |           WHILE '(' bool ')' stmt
+cmd_a:          'IF' '(' bool ')' cmd_a 'ELSE' cmd_a  # IFelse
+    |           'WHILE' '(' bool ')' stmt             # WHILE
     ;
-cmd_na:         IF '(' bool ')' stmt 
-    |           IF '(' bool ')' cmd_a ELSE cmd_na
+cmd_na:         'IF' '(' bool ')' stmt                # IF
+    |           'IF' '(' bool ')' cmd_a 'ELSE' cmd_na # IFelsena
     ;    
-tipos_var:      INT 
-        |       CHAR
+tipos_var:      INT                     # INT
+        |       CHAR                    # CHAR
         ;
-atribuicao:     id = expr;
+atribuicao:     ID '=' expr;           
 bool:           termo mais_bool;
-mais_bool:      (GE|LE|EQ|LT|GT|) termo mais_bool
-        |
+mais_bool:       GE termo mais_bool?     # GE
+        |        LE termo mais_bool?     # LE
+        |        EQ termo mais_bool?     # EQ
+        |        LT termo mais_bool?     # LT
+        |        GT termo mais_bool?     # GT
         ;
 expr:           termo mais_expr;
-mais_expr:      (ADD|SUB) termo mais_expr
-        |
+mais_expr:      ADD termo mais_expr?    # ADD
+        |       SUB termo mais_expr?     # SUB
         ;
-termo:          fator mais_termo;
-mais_termo:     (MUL|DIV) fator mais_termo
-          |
+termo:          fator mais_termo?;
+mais_termo:     MUL fator mais_termo?    # MUL
+          |     DIV fator mais_termo?    # DIV
           ;
-fator:    DIGIT 
-    | '(' expr ')'
+fator:    DIGIT                         # DIGIT
+    |      ID                           # ID
+    | '(' expr ')'                      # ParenexprParen
     ;
 c_chanel:       CHAN ID ID_COMP1 ID_COMP2;
 
@@ -56,12 +60,12 @@ MUL :   '*' ;                   // assigns token name to '*' used above in gramm
 DIV :   '/' ;
 ADD :   '+' ;
 SUB :   '-' ;
-ID  :   [a-zA-Z]+([0-9]*|[a-zA-Z]*);
 CHAR:   [a-zA-Z];
-DIGIT: ID;
-CHAN: ID;
-ID_COMP1: ID;
-ID_COMP2: ID;
+ID  :   CHAR+([0-9]*|[a-zA-Z]*);
+DIGIT: CHAR+([0-9]*|[a-zA-Z]*)|INT;
+CHAN: CHAR+([0-9]*|[a-zA-Z]*);
+ID_COMP1: CHAR+([0-9]*|[a-zA-Z]*);
+ID_COMP2: CHAR+([0-9]*|[a-zA-Z]*);
 NEWLINE: '\r'? '\n' ;
 SEQ :   'SEQ';
 PAR :   'PAR';

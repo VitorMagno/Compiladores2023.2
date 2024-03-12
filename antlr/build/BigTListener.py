@@ -62,30 +62,57 @@ class BigTListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by BigTParser#cmd_a.
-    def enterCmd_a(self, ctx:BigTParser.Cmd_aContext):
+    # Enter a parse tree produced by BigTParser#IFelse.
+    def enterIFelse(self, ctx:BigTParser.IFelseContext):
         pass
 
-    # Exit a parse tree produced by BigTParser#cmd_a.
-    def exitCmd_a(self, ctx:BigTParser.Cmd_aContext):
-        pass
-
-
-    # Enter a parse tree produced by BigTParser#cmd_na.
-    def enterCmd_na(self, ctx:BigTParser.Cmd_naContext):
-        pass
-
-    # Exit a parse tree produced by BigTParser#cmd_na.
-    def exitCmd_na(self, ctx:BigTParser.Cmd_naContext):
+    # Exit a parse tree produced by BigTParser#IFelse.
+    def exitIFelse(self, ctx:BigTParser.IFelseContext):
         pass
 
 
-    # Enter a parse tree produced by BigTParser#tipos_var.
-    def enterTipos_var(self, ctx:BigTParser.Tipos_varContext):
+    # Enter a parse tree produced by BigTParser#WHILE.
+    def enterWHILE(self, ctx:BigTParser.WHILEContext):
         pass
 
-    # Exit a parse tree produced by BigTParser#tipos_var.
-    def exitTipos_var(self, ctx:BigTParser.Tipos_varContext):
+    # Exit a parse tree produced by BigTParser#WHILE.
+    def exitWHILE(self, ctx:BigTParser.WHILEContext):
+        pass
+
+
+    # Enter a parse tree produced by BigTParser#IF.
+    def enterIF(self, ctx:BigTParser.IFContext):
+        pass
+
+    # Exit a parse tree produced by BigTParser#IF.
+    def exitIF(self, ctx:BigTParser.IFContext):
+        pass
+
+
+    # Enter a parse tree produced by BigTParser#IFelsena.
+    def enterIFelsena(self, ctx:BigTParser.IFelsenaContext):
+        pass
+
+    # Exit a parse tree produced by BigTParser#IFelsena.
+    def exitIFelsena(self, ctx:BigTParser.IFelsenaContext):
+        pass
+
+
+    # Enter a parse tree produced by BigTParser#INT.
+    def enterINT(self, ctx:BigTParser.INTContext):
+        pass
+
+    # Exit a parse tree produced by BigTParser#INT.
+    def exitINT(self, ctx:BigTParser.INTContext):
+        pass
+
+
+    # Enter a parse tree produced by BigTParser#CHAR.
+    def enterCHAR(self, ctx:BigTParser.CHARContext):
+        pass
+
+    # Exit a parse tree produced by BigTParser#CHAR.
+    def exitCHAR(self, ctx:BigTParser.CHARContext):
         pass
 
 
@@ -107,12 +134,48 @@ class BigTListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by BigTParser#mais_bool.
-    def enterMais_bool(self, ctx:BigTParser.Mais_boolContext):
+    # Enter a parse tree produced by BigTParser#GE.
+    def enterGE(self, ctx:BigTParser.GEContext):
         pass
 
-    # Exit a parse tree produced by BigTParser#mais_bool.
-    def exitMais_bool(self, ctx:BigTParser.Mais_boolContext):
+    # Exit a parse tree produced by BigTParser#GE.
+    def exitGE(self, ctx:BigTParser.GEContext):
+        pass
+
+
+    # Enter a parse tree produced by BigTParser#LE.
+    def enterLE(self, ctx:BigTParser.LEContext):
+        pass
+
+    # Exit a parse tree produced by BigTParser#LE.
+    def exitLE(self, ctx:BigTParser.LEContext):
+        pass
+
+
+    # Enter a parse tree produced by BigTParser#EQ.
+    def enterEQ(self, ctx:BigTParser.EQContext):
+        pass
+
+    # Exit a parse tree produced by BigTParser#EQ.
+    def exitEQ(self, ctx:BigTParser.EQContext):
+        pass
+
+
+    # Enter a parse tree produced by BigTParser#LT.
+    def enterLT(self, ctx:BigTParser.LTContext):
+        pass
+
+    # Exit a parse tree produced by BigTParser#LT.
+    def exitLT(self, ctx:BigTParser.LTContext):
+        pass
+
+
+    # Enter a parse tree produced by BigTParser#GT.
+    def enterGT(self, ctx:BigTParser.GTContext):
+        pass
+
+    # Exit a parse tree produced by BigTParser#GT.
+    def exitGT(self, ctx:BigTParser.GTContext):
         pass
 
 
@@ -125,12 +188,21 @@ class BigTListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by BigTParser#mais_expr.
-    def enterMais_expr(self, ctx:BigTParser.Mais_exprContext):
+    # Enter a parse tree produced by BigTParser#ADD.
+    def enterADD(self, ctx:BigTParser.ADDContext):
         pass
 
-    # Exit a parse tree produced by BigTParser#mais_expr.
-    def exitMais_expr(self, ctx:BigTParser.Mais_exprContext):
+    # Exit a parse tree produced by BigTParser#ADD.
+    def exitADD(self, ctx:BigTParser.ADDContext):
+        pass
+
+
+    # Enter a parse tree produced by BigTParser#SUB.
+    def enterSUB(self, ctx:BigTParser.SUBContext):
+        pass
+
+    # Exit a parse tree produced by BigTParser#SUB.
+    def exitSUB(self, ctx:BigTParser.SUBContext):
         pass
 
 
@@ -143,21 +215,48 @@ class BigTListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by BigTParser#mais_termo.
-    def enterMais_termo(self, ctx:BigTParser.Mais_termoContext):
+    # Enter a parse tree produced by BigTParser#MUL.
+    def enterMUL(self, ctx:BigTParser.MULContext):
         pass
 
-    # Exit a parse tree produced by BigTParser#mais_termo.
-    def exitMais_termo(self, ctx:BigTParser.Mais_termoContext):
+    # Exit a parse tree produced by BigTParser#MUL.
+    def exitMUL(self, ctx:BigTParser.MULContext):
         pass
 
 
-    # Enter a parse tree produced by BigTParser#fator.
-    def enterFator(self, ctx:BigTParser.FatorContext):
+    # Enter a parse tree produced by BigTParser#DIV.
+    def enterDIV(self, ctx:BigTParser.DIVContext):
         pass
 
-    # Exit a parse tree produced by BigTParser#fator.
-    def exitFator(self, ctx:BigTParser.FatorContext):
+    # Exit a parse tree produced by BigTParser#DIV.
+    def exitDIV(self, ctx:BigTParser.DIVContext):
+        pass
+
+
+    # Enter a parse tree produced by BigTParser#DIGIT.
+    def enterDIGIT(self, ctx:BigTParser.DIGITContext):
+        pass
+
+    # Exit a parse tree produced by BigTParser#DIGIT.
+    def exitDIGIT(self, ctx:BigTParser.DIGITContext):
+        pass
+
+
+    # Enter a parse tree produced by BigTParser#ID.
+    def enterID(self, ctx:BigTParser.IDContext):
+        pass
+
+    # Exit a parse tree produced by BigTParser#ID.
+    def exitID(self, ctx:BigTParser.IDContext):
+        pass
+
+
+    # Enter a parse tree produced by BigTParser#ParenexprParen.
+    def enterParenexprParen(self, ctx:BigTParser.ParenexprParenContext):
+        pass
+
+    # Exit a parse tree produced by BigTParser#ParenexprParen.
+    def exitParenexprParen(self, ctx:BigTParser.ParenexprParenContext):
         pass
 
 

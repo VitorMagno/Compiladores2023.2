@@ -39,18 +39,33 @@ class BigTVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BigTParser#cmd_a.
-    def visitCmd_a(self, ctx:BigTParser.Cmd_aContext):
+    # Visit a parse tree produced by BigTParser#IFelse.
+    def visitIFelse(self, ctx:BigTParser.IFelseContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BigTParser#cmd_na.
-    def visitCmd_na(self, ctx:BigTParser.Cmd_naContext):
+    # Visit a parse tree produced by BigTParser#WHILE.
+    def visitWHILE(self, ctx:BigTParser.WHILEContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BigTParser#tipos_var.
-    def visitTipos_var(self, ctx:BigTParser.Tipos_varContext):
+    # Visit a parse tree produced by BigTParser#IF.
+    def visitIF(self, ctx:BigTParser.IFContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BigTParser#IFelsena.
+    def visitIFelsena(self, ctx:BigTParser.IFelsenaContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BigTParser#INT.
+    def visitINT(self, ctx:BigTParser.INTContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BigTParser#CHAR.
+    def visitCHAR(self, ctx:BigTParser.CHARContext):
         return self.visitChildren(ctx)
 
 
@@ -64,8 +79,28 @@ class BigTVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BigTParser#mais_bool.
-    def visitMais_bool(self, ctx:BigTParser.Mais_boolContext):
+    # Visit a parse tree produced by BigTParser#GE.
+    def visitGE(self, ctx:BigTParser.GEContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BigTParser#LE.
+    def visitLE(self, ctx:BigTParser.LEContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BigTParser#EQ.
+    def visitEQ(self, ctx:BigTParser.EQContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BigTParser#LT.
+    def visitLT(self, ctx:BigTParser.LTContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BigTParser#GT.
+    def visitGT(self, ctx:BigTParser.GTContext):
         return self.visitChildren(ctx)
 
 
@@ -74,8 +109,13 @@ class BigTVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BigTParser#mais_expr.
-    def visitMais_expr(self, ctx:BigTParser.Mais_exprContext):
+    # Visit a parse tree produced by BigTParser#ADD.
+    def visitADD(self, ctx:BigTParser.ADDContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BigTParser#SUB.
+    def visitSUB(self, ctx:BigTParser.SUBContext):
         return self.visitChildren(ctx)
 
 
@@ -84,13 +124,28 @@ class BigTVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BigTParser#mais_termo.
-    def visitMais_termo(self, ctx:BigTParser.Mais_termoContext):
+    # Visit a parse tree produced by BigTParser#MUL.
+    def visitMUL(self, ctx:BigTParser.MULContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BigTParser#fator.
-    def visitFator(self, ctx:BigTParser.FatorContext):
+    # Visit a parse tree produced by BigTParser#DIV.
+    def visitDIV(self, ctx:BigTParser.DIVContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BigTParser#DIGIT.
+    def visitDIGIT(self, ctx:BigTParser.DIGITContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BigTParser#ID.
+    def visitID(self, ctx:BigTParser.IDContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BigTParser#ParenexprParen.
+    def visitParenexprParen(self, ctx:BigTParser.ParenexprParenContext):
         return self.visitChildren(ctx)
 
 
