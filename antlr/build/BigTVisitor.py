@@ -10,6 +10,9 @@ else:
 
 class BigTVisitor(ParseTreeVisitor):
 
+    def __init__(self):
+        self.memory = {}
+
     # Visit a parse tree produced by BigTParser#progama_minipar.
     def visitProgama_minipar(self, ctx:BigTParser.Progama_miniparContext):
         return self.visitChildren(ctx)
@@ -84,8 +87,10 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#atribuicao.
     def visitAtribuicao(self, ctx:BigTParser.AtribuicaoContext):
-        return self.visitChildren(ctx)
-
+        name = ctx.ID().getText()
+        value = self.visit(ctx.expr())
+        self.memory[name] = value
+        return value
 
     # Visit a parse tree produced by BigTParser#bool.
     def visitBool(self, ctx:BigTParser.BoolContext):
@@ -190,12 +195,13 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#ID.
     def visitID(self, ctx:BigTParser.IDContext):
-        r = self.visit(ctx.ID.__get__)
+        name = ctx.ID().getText()
+        if(self.visit(ctx) in self.memory):
+            r = self.memory[name]
         if(type(r) is int):
             r = int(r)
         else:
             r = str(r)
-        
         return r
 
 
