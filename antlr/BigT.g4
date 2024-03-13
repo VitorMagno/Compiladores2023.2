@@ -1,7 +1,7 @@
 grammar BigT;		
 
 progama_minipar:	bloco_stmt
-                ;
+            ;
 bloco_stmt:     bloco_seq 
         |       bloco_par
         ;

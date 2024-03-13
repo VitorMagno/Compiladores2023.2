@@ -1,5 +1,6 @@
 # Generated from BigT.g4 by ANTLR 4.13.1
 from antlr4 import *
+from black import nullcontext
 if "." in __name__:
     from .BigTParser import BigTParser
 else:
@@ -41,22 +42,34 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#IFelse.
     def visitIFelse(self, ctx:BigTParser.IFelseContext):
-        return self.visitChildren(ctx)
+        condicao = self.visit(ctx.bool())
+        if(condicao):
+            return self.visit(ctx.cmd_a())
+        else:
+            return self.visit(ctx.cmd_a())
 
 
     # Visit a parse tree produced by BigTParser#WHILE.
     def visitWHILE(self, ctx:BigTParser.WHILEContext):
-        return self.visitChildren(ctx)
+        condicao = self.visit(ctx.bool())
+        while(bool):
+            return self.visit(ctx.stmt())
 
 
     # Visit a parse tree produced by BigTParser#IF.
     def visitIF(self, ctx:BigTParser.IFContext):
-        return self.visitChildren(ctx)
+        condicao = self.visit(ctx.bool())
+        if(condicao):
+            return self.visit(ctx.cmd_a())
 
 
     # Visit a parse tree produced by BigTParser#IFelsena.
     def visitIFelsena(self, ctx:BigTParser.IFelsenaContext):
-        return self.visitChildren(ctx)
+        condicao = self.visit(ctx.bool())
+        if(condicao):
+            return self.visit(ctx.cmd_a())
+        else:
+            return self.visit(ctx.cmd_na)
 
 
     # Visit a parse tree produced by BigTParser#INT.
@@ -81,27 +94,52 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#GE.
     def visitGE(self, ctx:BigTParser.GEContext):
-        return self.visitChildren(ctx)
+        termo1 = self.visitBool(ctx.termo())
+        termo2 = self.visit(ctx.termo())
+        if(termo1 >= termo2):
+            return True
+        else:
+            return False
 
 
     # Visit a parse tree produced by BigTParser#LE.
     def visitLE(self, ctx:BigTParser.LEContext):
-        return self.visitChildren(ctx)
+        termo1 = self.visitBool(ctx.termo())
+        termo2 = self.visit(ctx.termo())
+        if(termo1 <= termo2):
+            return True
+        else:
+            return False
 
 
     # Visit a parse tree produced by BigTParser#EQ.
     def visitEQ(self, ctx:BigTParser.EQContext):
-        return self.visitChildren(ctx)
+        termo1 = self.visitBool(ctx.termo())
+        termo2 = self.visit(ctx.termo())
+        if(termo1 == termo2):
+            return True
+        else:
+            return False
 
 
     # Visit a parse tree produced by BigTParser#LT.
     def visitLT(self, ctx:BigTParser.LTContext):
-        return self.visitChildren(ctx)
+        termo1 = self.visitBool(ctx.termo())
+        termo2 = self.visit(ctx.termo())
+        if(termo1 < termo2):
+            return True
+        else:
+            return False
 
 
     # Visit a parse tree produced by BigTParser#GT.
     def visitGT(self, ctx:BigTParser.GTContext):
-        return self.visitChildren(ctx)
+        termo1 = self.visitBool(ctx.termo())
+        termo2 = self.visit(ctx.termo())
+        if(termo1 > termo2):
+            return True
+        else:
+            return False
 
 
     # Visit a parse tree produced by BigTParser#expr.
@@ -111,27 +149,38 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#ADD.
     def visitADD(self, ctx:BigTParser.ADDContext):
-        return self.visitChildren(ctx)
+        termo1 = self.visitExpr(ctx.termo())
+        termo2 = self.visit(ctx.termo())
+        return termo1 + termo2
 
 
     # Visit a parse tree produced by BigTParser#SUB.
     def visitSUB(self, ctx:BigTParser.SUBContext):
-        return self.visitChildren(ctx)
+        termo1 = self.visitExpr(ctx.termo())
+        termo2 = self.visit(ctx.termo())
+        return termo1 - termo2
 
 
     # Visit a parse tree produced by BigTParser#termo.
     def visitTermo(self, ctx:BigTParser.TermoContext):
-        return self.visitChildren(ctx)
+        if (self.visit(ctx.mais_termo()) is not nullcontext):
+            return self.visit(ctx.mais_termo())
+        else:
+            return self.visit(ctx.fator())
 
 
     # Visit a parse tree produced by BigTParser#MUL.
     def visitMUL(self, ctx:BigTParser.MULContext):
-        return self.visitChildren(ctx)
+        termo1 = self.visitTermo(ctx.fator())
+        termo2 = self.visit(ctx.fator())
+        return termo1 * termo2
 
 
     # Visit a parse tree produced by BigTParser#DIV.
     def visitDIV(self, ctx:BigTParser.DIVContext):
-        return self.visitChildren(ctx)
+        termo1 = self.visitTermo(ctx.fator())
+        termo2 = self.visit(ctx.fator())        
+        return termo1 / termo2
 
 
     # Visit a parse tree produced by BigTParser#DIGIT.
@@ -141,17 +190,26 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#ID.
     def visitID(self, ctx:BigTParser.IDContext):
-        return self.visitChildren(ctx)
+        r = self.visit(ctx.ID.__get__)
+        if(type(r) is int):
+            r = int(r)
+        else:
+            r = str(r)
+        
+        return r
 
 
     # Visit a parse tree produced by BigTParser#ParenexprParen.
     def visitParenexprParen(self, ctx:BigTParser.ParenexprParenContext):
-        return self.visitChildren(ctx)
+        return self.visit(ctx.expr())
 
 
     # Visit a parse tree produced by BigTParser#c_chanel.
     def visitC_chanel(self, ctx:BigTParser.C_chanelContext):
-        return self.visitChildren(ctx)
+        nome_conexao = self.visit(ctx.ID.getText())
+        id_pc1 = self.visit(ctx.ID_COMP1.getText())
+        id_pc2 = self.visit(ctx.ID_COMP2.getText())
+        return 
 
 
 
