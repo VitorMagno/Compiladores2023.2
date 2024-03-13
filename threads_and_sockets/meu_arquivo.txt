@@ -1,0 +1,9 @@
+Pedaço de uma tarefa que pode ser encadeadas sendo executadas simultaneamente
+
+thread:
+	Aplicações rodam através de um processo( conjunto de instruções )
+	Quando um programa vai para a memória ele se torna um processo
+	Thread menor unidade de um processo
+	
+
+Analise sintática -> gramática e análise léxica
