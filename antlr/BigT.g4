@@ -1,9 +1,9 @@
 grammar BigT;		
 
-progama_minipar:	bloco_stmt
+progama_minipar:	bloco_stmt NEWLINE
             ;
-bloco_stmt:     bloco_seq 
-        |       bloco_par
+bloco_stmt:     bloco_seq NEWLINE
+        |       bloco_par NEWLINE
         ;
 bloco_seq:      'SEQ' stmts;
 bloco_par:      'PAR' stmts;
@@ -14,9 +14,9 @@ stmt:           cmd_a
     |           cmd_na
     ;
 cmd_a:          'IF' '(' bool ')' cmd_a 'ELSE' cmd_a  # IFelse
-    |           'WHILE' '(' bool ')' stmt             # WHILE
+    |           'WHILE' '(' bool ')' stmts             # WHILE
     ;
-cmd_na:         'IF' '(' bool ')' stmt                # IF
+cmd_na:         'IF' '(' bool ')' stmts                # IF
     |           'IF' '(' bool ')' cmd_a 'ELSE' cmd_na # IFelsena
     ;    
 tipos_var:      INT                     # INT
@@ -42,7 +42,7 @@ fator:    DIGIT                         # DIGIT
     |      ID                           # ID
     | '(' expr ')'                      # ParenexprParen
     ;
-c_chanel:       CHAN ID ID_COMP1 ID_COMP2;
+c_chanel:  CHAN ID ID_COMP1 ID_COMP2;
 
 // parser rules start with lowercase letters, lexer rules with uppercase
 IF :   'IF';
@@ -63,7 +63,7 @@ SUB :   '-' ;
 CHAR:   [a-zA-Z];
 ID  :   CHAR+([0-9]*|[a-zA-Z]*);
 DIGIT: CHAR+([0-9]*|[a-zA-Z]*)|INT;
-CHAN: CHAR+([0-9]*|[a-zA-Z]*);
+CHAN: 'CHAN';
 ID_COMP1: CHAR+([0-9]*|[a-zA-Z]*);
 ID_COMP2: CHAR+([0-9]*|[a-zA-Z]*);
 NEWLINE: '\r'? '\n' ;

@@ -1,4 +1,5 @@
 import sys
+import subprocess
 from antlr4 import *
 from antlr4.InputStream import InputStream
 from build.BigTLexer import BigTLexer
@@ -7,7 +8,7 @@ from build.BigTListener import BigTListener
 from build.BigTVisitor import BigTVisitor
 
 def main(argv):
-    if len(sys.argv) > 1:
+    if(len(sys.argv) > 1):
         input_stream = FileStream(sys.argv[1])
     else:
         input_stream = InputStream(sys.stdin.readline())
