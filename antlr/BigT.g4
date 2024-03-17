@@ -1,73 +1,75 @@
-grammar BigT;		
+grammar BigT;
 
-progama_minipar:	bloco_stmt NEWLINE
+start: programa_minipar (EOF)
+    ;
+programa_minipar:	bloco_stmt
             ;
-bloco_stmt:     bloco_seq NEWLINE
-        |       bloco_par NEWLINE
+bloco_stmt:     bloco_seq
+        |       bloco_par
         ;
-bloco_seq:      'SEQ' stmts;
-bloco_par:      'PAR' stmts;
+bloco_seq:      'SEQ' (NEWLINE) (ENTRATAB) stmts+ (NEWLINE) (CONTRATAB);
+bloco_par:      'PAR' (NEWLINE) (ENTRATAB) stmts+ (NEWLINE) (CONTRATAB);
 stmts:          atribuicao 
-    |           stmt
+    |           (NEWLINE)? stmt
     ;
-stmt:           cmd_a 
-    |           cmd_na
+stmt:           (NEWLINE)? cmd_a 
+    |           (NEWLINE)? cmd_na
     ;
-cmd_a:          'IF' '(' bool ')' cmd_a 'ELSE' cmd_a  # IFelse
-    |           'WHILE' '(' bool ')' stmts             # WHILE
+cmd_a:          'if' '(' bool ')' (NEWLINE)? (ENTRATAB)? cmd_a (NEWLINE)? (CONTRATAB)? 'else' (ENTRATAB)? cmd_a (NEWLINE)? (CONTRATAB)? # IFelse
+    |           'while' '(' bool ')' (NEWLINE)? (ENTRATAB)? stmts (NEWLINE)? (CONTRATAB)?             # WHILE
     ;
-cmd_na:         'IF' '(' bool ')' stmts                # IF
-    |           'IF' '(' bool ')' cmd_a 'ELSE' cmd_na # IFelsena
+cmd_na:         'if' '(' bool ')' (NEWLINE)? (ENTRATAB)? stmts (NEWLINE)? (CONTRATAB)?                # IF
+    |           'if' '(' bool ')' (NEWLINE)? (ENTRATAB)? cmd_a (NEWLINE)? (CONTRATAB)? 'else' (NEWLINE)? (ENTRATAB)? cmd_na (NEWLINE)? (CONTRATAB)? # IFelsena
     ;    
-tipos_var:      INT                     # INT
-        |       CHAR                    # CHAR
+tipos_var:      (NEWLINE)? INT                     # INT
+        |       (NEWLINE)? CHAR                    # CHAR
         ;
-atribuicao:     ID '=' expr;           
+atribuicao:     (ID) '=' expr (NEWLINE);           
 bool:           termo mais_bool;
-mais_bool:       GE termo mais_bool?     # GE
-        |        LE termo mais_bool?     # LE
-        |        EQ termo mais_bool?     # EQ
-        |        LT termo mais_bool?     # LT
-        |        GT termo mais_bool?     # GT
+mais_bool:       (GE) termo mais_bool?     (NEWLINE)?# GE
+        |        (LE) termo mais_bool?     (NEWLINE)?# LE
+        |        (EQ) termo mais_bool?     (NEWLINE)?# EQ
+        |        (LT) termo mais_bool?     (NEWLINE)?# LT
+        |        (GT) termo mais_bool?     (NEWLINE)?# GT                
         ;
 expr:           termo mais_expr;
-mais_expr:      ADD termo mais_expr?    # ADD
-        |       SUB termo mais_expr?     # SUB
+mais_expr:      (ADD) termo mais_expr?     (NEWLINE)?# ADD
+        |       (SUB) termo mais_expr?     (NEWLINE)?# SUB
         ;
 termo:          fator mais_termo?;
-mais_termo:     MUL fator mais_termo?    # MUL
-          |     DIV fator mais_termo?    # DIV
+mais_termo:     (MUL) fator mais_termo?    (NEWLINE)?# MUL
+          |     (DIV) fator mais_termo?    (NEWLINE)?# DIV
           ;
-fator:    DIGIT                         # DIGIT
-    |      ID                           # ID
-    | '(' expr ')'                      # ParenexprParen
+fator:    (DIGIT)    (NEWLINE)?                     # DIGIT
+    |      (ID)      (NEWLINE)?                     # ID
+    | '(' expr ')' (NEWLINE)?                     # ParenexprParen
     ;
-c_chanel:  CHAN ID ID_COMP1 ID_COMP2;
+c_chanel:  'CHAN' {ID} 'id_comp1' 'id_comp2' (NEWLINE);
 
 // parser rules start with lowercase letters, lexer rules with uppercase
-IF :   'IF';
-ELSE :   'ELSE';
-WHILE :   'WHILE';
 AND :   '&&';
-OR :   '||';
+OR :    '||';
 NOT:    '!';
 GE :    '>=';
 LE :    '<=';
 EQ :    '==';
 LT:     '<';
 GT :    '>';
-MUL :   '*' ;                   // assigns token name to '*' used above in grammar
-DIV :   '/' ;
-ADD :   '+' ;
-SUB :   '-' ;
+MUL :   '*';                   // assigns token name to '*' used above in grammar
+DIV :   '/';
+ADD :   '+';
+SUB :   '-';
 CHAR:   [a-zA-Z];
-ID  :   CHAR+([0-9]*|[a-zA-Z]*);
+ID  :   [a-zA-Z]+;
+INT :   [0-9]+ ;
 DIGIT: CHAR+([0-9]*|[a-zA-Z]*)|INT;
-CHAN: 'CHAN';
+CHAN: [CHAN];
 ID_COMP1: CHAR+([0-9]*|[a-zA-Z]*);
 ID_COMP2: CHAR+([0-9]*|[a-zA-Z]*);
-NEWLINE: '\r'? '\n' ;
-SEQ :   'SEQ';
-PAR :   'PAR';
-INT :   [0-9]+ ;             // Define token INT as one or more digits
-WS  :   [ \t]+ -> skip ;    // Define whitespace rule, toss it out
+NEWLINE: '\r'? '\n';
+SEQ :   [SEQ];
+PAR :   [PAR];
+ENTRATAB:  [ \t]+;
+CONTRATAB: [ \b];
+SINGLE_SPACE: ' ';
+WS  :   SINGLE_SPACE -> skip;    // Define whitespace rule, toss it out

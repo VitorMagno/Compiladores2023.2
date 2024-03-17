@@ -14,7 +14,7 @@ class BigTVisitor(ParseTreeVisitor):
         self.memory = {}
 
     # Visit a parse tree produced by BigTParser#progama_minipar.
-    def visitProgama_minipar(self, ctx:BigTParser.Progama_miniparContext):
+    def visitPrograma_minipar(self, ctx:BigTParser.Programa_miniparContext):
         return self.visitChildren(ctx)
 
 

@@ -8,12 +8,21 @@ else:
 # This class defines a complete listener for a parse tree produced by BigTParser.
 class BigTListener(ParseTreeListener):
 
-    # Enter a parse tree produced by BigTParser#progama_minipar.
-    def enterProgama_minipar(self, ctx:BigTParser.Progama_miniparContext):
+    # Enter a parse tree produced by BigTParser#start.
+    def enterStart(self, ctx:BigTParser.StartContext):
         pass
 
-    # Exit a parse tree produced by BigTParser#progama_minipar.
-    def exitProgama_minipar(self, ctx:BigTParser.Progama_miniparContext):
+    # Exit a parse tree produced by BigTParser#start.
+    def exitStart(self, ctx:BigTParser.StartContext):
+        pass
+
+
+    # Enter a parse tree produced by BigTParser#programa_minipar.
+    def enterPrograma_minipar(self, ctx:BigTParser.Programa_miniparContext):
+        pass
+
+    # Exit a parse tree produced by BigTParser#programa_minipar.
+    def exitPrograma_minipar(self, ctx:BigTParser.Programa_miniparContext):
         pass
 
 

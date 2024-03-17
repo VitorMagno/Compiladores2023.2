@@ -15,7 +15,7 @@ def main(argv):
     lexer = BigTLexer(input_stream)
     stream = CommonTokenStream(lexer)
     parser = BigTParser(stream)
-    tree = parser.progama_minipar()
+    tree = parser.start()
 
     visitor = BigTVisitor()
     visitor.visit(tree)
