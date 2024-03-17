@@ -1,50 +1,52 @@
 grammar BigT;
 
-start: programa_minipar (EOF)
+start: programa_minipar
     ;
 programa_minipar:	bloco_stmt
             ;
 bloco_stmt:     bloco_seq
         |       bloco_par
         ;
-bloco_seq:      'SEQ' (NEWLINE) (ENTRATAB) stmts+ (NEWLINE) (CONTRATAB);
-bloco_par:      'PAR' (NEWLINE) (ENTRATAB) stmts+ (NEWLINE) (CONTRATAB);
-stmts:          atribuicao 
-    |           (NEWLINE)? stmt
+bloco_seq:      NEWLINE*SINGLE_SPACE*ENTRATAB* 'SEQ' ((NEWLINE)(ENTRATAB)) stmts+ ENDLINE* CONTRATAB* EOF;
+bloco_par:      NEWLINE*SINGLE_SPACE*ENTRATAB* 'PAR' ((NEWLINE)(ENTRATAB)) stmts+ ENDLINE* CONTRATAB* EOF;
+stmts:          NEWLINE*SINGLE_SPACE*ENTRATAB* atribuicao   ENDLINE EOF
+    |           NEWLINE*SINGLE_SPACE*ENTRATAB* fator        ENDLINE EOF
+    |           NEWLINE*SINGLE_SPACE*ENTRATAB* expr         ENDLINE EOF
+    |           NEWLINE*SINGLE_SPACE*ENTRATAB* stmt         ENDLINE EOF
     ;
-stmt:           (NEWLINE)? cmd_a 
-    |           (NEWLINE)? cmd_na
+stmt:           cmd_a 
+    |           cmd_na
     ;
-cmd_a:          'if' '(' bool ')' (NEWLINE)? (ENTRATAB)? cmd_a (NEWLINE)? (CONTRATAB)? 'else' (ENTRATAB)? cmd_a (NEWLINE)? (CONTRATAB)? # IFelse
-    |           'while' '(' bool ')' (NEWLINE)? (ENTRATAB)? stmts (NEWLINE)? (CONTRATAB)?             # WHILE
+cmd_a:          'if' '(' bool ')' cmd_a 'else' cmd_a # IFelse
+    |           'while' '(' bool ')'stmts            # WHILE
     ;
-cmd_na:         'if' '(' bool ')' (NEWLINE)? (ENTRATAB)? stmts (NEWLINE)? (CONTRATAB)?                # IF
-    |           'if' '(' bool ')' (NEWLINE)? (ENTRATAB)? cmd_a (NEWLINE)? (CONTRATAB)? 'else' (NEWLINE)? (ENTRATAB)? cmd_na (NEWLINE)? (CONTRATAB)? # IFelsena
+cmd_na:         'if' '(' bool ')' stmts                 # IF
+    |           'if' '(' bool ')' cmd_a  'else'  cmd_na # IFelsena
     ;    
-tipos_var:      (NEWLINE)? INT                     # INT
-        |       (NEWLINE)? CHAR                    # CHAR
+tipos_var:      INT                     # INT
+        |       CHAR                    # CHAR
         ;
-atribuicao:     (ID) '=' expr (NEWLINE);           
-bool:           termo mais_bool;
-mais_bool:       (GE) termo mais_bool?     (NEWLINE)?# GE
-        |        (LE) termo mais_bool?     (NEWLINE)?# LE
-        |        (EQ) termo mais_bool?     (NEWLINE)?# EQ
-        |        (LT) termo mais_bool?     (NEWLINE)?# LT
-        |        (GT) termo mais_bool?     (NEWLINE)?# GT                
+atribuicao:     ID '=' expr;           
+bool:           termo              # simpleAtr1
+    |           termo GE termo     # GE
+    |           termo LE termo     # LE
+    |           termo EQ termo     # EQ
+    |           termo LT termo     # LT
+    |           termo GT termo     # GT                
         ;
-expr:           termo mais_expr;
-mais_expr:      (ADD) termo mais_expr?     (NEWLINE)?# ADD
-        |       (SUB) termo mais_expr?     (NEWLINE)?# SUB
-        ;
-termo:          fator mais_termo?;
-mais_termo:     (MUL) fator mais_termo?    (NEWLINE)?# MUL
-          |     (DIV) fator mais_termo?    (NEWLINE)?# DIV
-          ;
-fator:    (DIGIT)    (NEWLINE)?                     # DIGIT
-    |      (ID)      (NEWLINE)?                     # ID
-    | '(' expr ')' (NEWLINE)?                     # ParenexprParen
+expr:            termo              # simpleAtr2
+    |            termo ADD termo    # ADD
+    |            termo SUB termo    # SUB
     ;
-c_chanel:  'CHAN' {ID} 'id_comp1' 'id_comp2' (NEWLINE);
+termo:    fator              # simpleAtr3
+    |     fator MUL fator    # MUL
+    |     fator DIV fator    # DIV
+    ;
+fator:    DIGIT                         # DIGIT
+    |      ID                           # ID
+    | '(' expr ')'                      # ParenexprParen
+    ;
+c_chanel:  SINGLE_SPACE* 'CHAN' ID 'id_comp1' 'id_comp2' NEWLINE;
 
 // parser rules start with lowercase letters, lexer rules with uppercase
 AND :   '&&';
@@ -59,8 +61,8 @@ MUL :   '*';                   // assigns token name to '*' used above in gramma
 DIV :   '/';
 ADD :   '+';
 SUB :   '-';
-CHAR:   [a-zA-Z];
-ID  :   [a-zA-Z]+;
+CHAR:   [a-z];
+ID:   CHAR+;
 INT :   [0-9]+ ;
 DIGIT: CHAR+([0-9]*|[a-zA-Z]*)|INT;
 CHAN: [CHAN];
@@ -68,8 +70,10 @@ ID_COMP1: CHAR+([0-9]*|[a-zA-Z]*);
 ID_COMP2: CHAR+([0-9]*|[a-zA-Z]*);
 NEWLINE: '\r'? '\n';
 SEQ :   [SEQ];
-PAR :   [PAR];
+PAR :   [PAR]; 
 ENTRATAB:  [ \t]+;
 CONTRATAB: [ \b];
+ENDLINE:SINGLE_SPACE* NEWLINE;
+COMMENT: '#' CHAR* NEWLINE -> channel(HIDDEN);
 SINGLE_SPACE: ' ';
 WS  :   SINGLE_SPACE -> skip;    // Define whitespace rule, toss it out
