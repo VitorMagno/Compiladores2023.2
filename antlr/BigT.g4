@@ -2,17 +2,17 @@ grammar BigT;
 
 start: programa_minipar
     ;
-programa_minipar:	bloco_stmt
+programa_minipar:	bloco_stmt* EOF
             ;
 bloco_stmt:     bloco_seq
         |       bloco_par
         ;
-bloco_seq:      NEWLINE*SINGLE_SPACE*ENTRATAB* 'SEQ' ((NEWLINE)(ENTRATAB)) stmts+ ENDLINE* CONTRATAB* EOF;
-bloco_par:      NEWLINE*SINGLE_SPACE*ENTRATAB* 'PAR' ((NEWLINE)(ENTRATAB)) stmts+ ENDLINE* CONTRATAB* EOF;
-stmts:          NEWLINE*SINGLE_SPACE*ENTRATAB* atribuicao   ENDLINE EOF
-    |           NEWLINE*SINGLE_SPACE*ENTRATAB* fator        ENDLINE EOF
-    |           NEWLINE*SINGLE_SPACE*ENTRATAB* expr         ENDLINE EOF
-    |           NEWLINE*SINGLE_SPACE*ENTRATAB* stmt         ENDLINE EOF
+bloco_seq:      'SEQ' ENTRATAB NEWLINE stmts* NEWLINE CONTRATAB;
+bloco_par:      'PAR' ENTRATAB NEWLINE stmts* NEWLINE CONTRATAB;
+stmts:          atribuicao 
+    |           fator      
+    |           expr       
+    |           stmt       
     ;
 stmt:           cmd_a 
     |           cmd_na
