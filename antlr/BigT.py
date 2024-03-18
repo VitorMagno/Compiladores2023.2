@@ -4,7 +4,7 @@ from antlr4 import *
 from antlr4.InputStream import InputStream
 from build.BigTLexer import BigTLexer
 from build.BigTParser import BigTParser
-from build.BigTListener import BigTListener
+# from build.BigTListener import BigTListener
 from build.BigTVisitor import BigTVisitor
 
 def main(argv):
