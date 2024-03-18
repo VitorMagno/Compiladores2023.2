@@ -8,6 +8,8 @@ else:
 # This class defines a complete generic visitor for a parse tree produced by BigTParser.
 
 class BigTVisitor(ParseTreeVisitor):
+    def __init__(self):
+        self.variables = {}
 
     # Visit a parse tree produced by BigTParser#start.
     def visitStart(self, ctx:BigTParser.StartContext):
