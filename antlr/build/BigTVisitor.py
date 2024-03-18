@@ -17,8 +17,9 @@ class Par_Threads:
         print("Thread {count} iniciada!")
         self.thread.start()
         count=count+1
-        self.thread.join()
+        resultado = self.thread.join()
         print("Thread {count} finalizada!")
+        return resultado
 
 class BigTVisitor(ParseTreeVisitor):
 
@@ -213,11 +214,7 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#c_chanel.
     def visitC_chanel(self, ctx:BigTParser.C_chanelContext):
-        nome_conexao = self.visit(ctx.ID.getText())
-        id_pc1 = self.visit(ctx.ID_COMP1.getText())
-        id_pc2 = self.visit(ctx.ID_COMP2.getText())
+        self.visit(ctx)
         return 
-
-
 
 del BigTParser
