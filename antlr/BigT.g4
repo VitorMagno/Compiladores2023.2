@@ -10,7 +10,6 @@ bloco_stmt:     bloco_seq
 bloco_seq:      'SEQ' '{' (stmts)* '}';
 bloco_par:      'PAR' '{' (stmts)* '}';
 stmts:          atribuicao ENDLINE
-    |           fator      ENDLINE
     |           expr       ENDLINE
     |           stmt       ENDLINE
     ;
