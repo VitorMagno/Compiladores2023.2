@@ -1,4 +1,5 @@
 # Generated from BigT.g4 by ANTLR 4.13.1
+import threading
 from antlr4 import *
 from black import nullcontext
 if "." in __name__:
@@ -7,6 +8,17 @@ else:
     from BigTParser import BigTParser
 
 # This class defines a complete generic visitor for a parse tree produced by BigTParser.
+class Par_Threads:
+    def _init_(self, func) -> None:
+        self.thread = threading.Thread(target=func)
+        count = 1
+
+    def run(self):
+        print("Thread {count} iniciada!")
+        self.thread.start()
+        count=count+1
+        self.thread.join()
+        print("Thread {count} finalizada!")
 
 class BigTVisitor(ParseTreeVisitor):
 
@@ -30,7 +42,8 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#bloco_par.
     def visitBloco_par(self, ctx:BigTParser.Bloco_parContext):
-        return self.visitChildren(ctx)
+        result = Par_Threads(self.visitChildren(ctx))
+        return result
 
 
     # Visit a parse tree produced by BigTParser#stmts.
