@@ -1,9 +1,7 @@
 SEQ {
     chan(localhost, cliente, servidor);
-    a = 0;
     a = 3+1;
-    b = 4;
-    print(b);
+    print(a);
 }
 SEQ {
     i=1;

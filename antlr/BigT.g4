@@ -11,8 +11,7 @@ bloco_seq:          SEQ AC stmts* FC;
 bloco_par:          PAR AC stmts* FC;
 c_chanel:           CHAN AP id VIRG id VIRG id FP ENDLINE # chan;
 print:              PRINT AP id FP ENDLINE # prin;
-funcao:             id AP args FP  ENDLINE 
-    |               c_chanel        
+funcao:             c_chanel        
     |               print           
     ;
 atribuicao:         id ASSIGN (expr | comparador) ENDLINE;
@@ -21,7 +20,6 @@ stmts:              atribuicao      #atr
     |               repeticao       #rep
     |               funcao          #func
     ;
-args:               id(VIRG id)*;
 comparacao:         comparacao_comp (ELSE comparacao_comp)* (ELSE AC stmts* FC)?;
 comparacao_comp:    IF AP comparador FP AC stmts* FC;
 repeticao:          WHILE AP comparador FP AC stmts* FC; 
