@@ -1,1 +1,1 @@
-/home/vitor/.local/bin/./antlr4 -v 4.13.1 -o build -visitor -Dlanguage=Python3 BigT.g4
+/home/vitor/.local/bin/./antlr4 -v 4.13.1 -o build -no-listener -Dlanguage=Python3 BigT.g4
