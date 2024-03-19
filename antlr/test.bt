@@ -1,7 +1,7 @@
 SEQ{
-    a=90;
-    print(a);
     chan(localhost, cliente, servidor);
-    a = 90+10;
+    b = 10;
+    a=90;
+    a=b+a;
     print(a);
 }

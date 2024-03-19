@@ -1,5 +1,9 @@
 # Generated from BigT.g4 by ANTLR 4.13.1
+from curses.ascii import isalpha
+import multiprocessing
+import subprocess
 from antlr4 import *
+from pyparsing import alphas
 if "." in __name__:
     from .BigTParser import BigTParser
 else:
@@ -34,13 +38,16 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#bloco_par.
     def visitBloco_par(self, ctx:BigTParser.Bloco_parContext): #montar uma thread para rodar esse retorno
-        return self.visitChildren(ctx)
-
+        result = multiprocessing.Process(self.visitChildren(ctx))
+        result.start()
+        result.join()
+        return result
 
     # Visit a parse tree produced by BigTParser#chan.
-    def visitChan(self, ctx:BigTParser.ChanContext):
-        return self.visitChildren(ctx)
-
+    async def visitChan(self, ctx:BigTParser.ChanContext):
+        a = await subprocess.Popen(['return self.visitChildren(ctx)'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        resultado = a.communicate()
+        print(resultado)
 
     # Visit a parse tree produced by BigTParser#prin.
     def visitPrin(self, ctx:BigTParser.PrinContext):
@@ -87,11 +94,6 @@ class BigTVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BigTParser#args.
-    def visitArgs(self, ctx:BigTParser.ArgsContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by BigTParser#comparacao.
     def visitComparacao(self, ctx:BigTParser.ComparacaoContext):
         return self.visitChildren(ctx)
@@ -99,18 +101,40 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#comparacao_comp.
     def visitComparacao_comp(self, ctx:BigTParser.Comparacao_compContext):
-        return self.visitChildren(ctx)
+        boleano = self.visit(ctx.comparador())
+        if(boleano == True):
+            return self.visitChildren(ctx.stmts())
+        else:
+            return 
 
 
     # Visit a parse tree produced by BigTParser#repeticao.
     def visitRepeticao(self, ctx:BigTParser.RepeticaoContext):
-        return self.visitChildren(ctx)
+        boleano = self.visit(ctx.comparador())
+        if(boleano):
+            while True:
+                self.visit(ctx.stmts())
+                if(self.visit(ctx.comparador()) == True):
+                    continue
+                else:
+                    break
+        return 
 
 
     # Visit a parse tree produced by BigTParser#DIV.
     def visitDIV(self, ctx:BigTParser.DIVContext):
-        right = int(self.visit(ctx.right))
-        left = int(self.visit(ctx.left))
+        right = self.visit(ctx.right)
+        left = self.visit(ctx.left)
+        if(isalpha(right)):
+            if(right in self.variables):
+                right = int(self.variables.get(right))
+            else:
+                print("variavel nao declarada")
+        if(isalpha(left)):
+            if(left in self.variables):
+                left = int(self.variables.get(left))
+            else:
+                print("variavel nao declarada")
         if(left != 0):
             return left / right
         else:
@@ -119,22 +143,52 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#ADD.
     def visitADD(self, ctx:BigTParser.ADDContext):
-        right = int(self.visit(ctx.right))
-        left = int(self.visit(ctx.left))
+        right = self.visit(ctx.right)
+        left = self.visit(ctx.left)
+        if(isalpha(right)):
+            if(right in self.variables):
+                right = int(self.variables.get(right))
+            else:
+                print("variavel nao declarada")
+        if(isalpha(left)):
+            if(left in self.variables):
+                left = int(self.variables.get(left))
+            else:
+                print("variavel nao declarada")
         return right + left
 
 
     # Visit a parse tree produced by BigTParser#SUB.
     def visitSUB(self, ctx:BigTParser.SUBContext):
-        right = int(self.visit(ctx.right))
-        left = int(self.visit(ctx.left))
-        return right - left
+        right = self.visit(ctx.right)
+        left = self.visit(ctx.left)
+        if(isalpha(right)):
+            if(right in self.variables):
+                right = int(self.variables.get(right))
+            else:
+                print("variavel nao declarada")
+        if(isalpha(left)):
+            if(left in self.variables):
+                left = int(self.variables.get(left))
+            else:
+                print("variavel nao declarada")
+        return left - right
 
 
     # Visit a parse tree produced by BigTParser#MUL.
     def visitMUL(self, ctx:BigTParser.MULContext):
-        right = int(self.visit(ctx.right))
-        left = int(self.visit(ctx.left))
+        right = self.visit(ctx.right)
+        left = self.visit(ctx.left)
+        if(isalpha(right)):
+            if(right in self.variables):
+                right = int(self.variables.get(right))
+            else:
+                print("variavel nao declarada")
+        if(isalpha(left)):
+            if(left in self.variables):
+                left = int(self.variables.get(left))
+            else:
+                print("variavel nao declarada")
         return right * left
 
 
@@ -155,27 +209,97 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#GT.
     def visitGT(self, ctx:BigTParser.GTContext):
-        return self.visitChildren(ctx)
+        right = self.visit(ctx.right)
+        left = self.visit(ctx.left)
+        if(isalpha(right)):
+            if(right in self.variables):
+                right = int(self.variables.get(right))
+            else:
+                print("variavel nao declarada")
+        if(isalpha(left)):
+            if(left in self.variables):
+                left = int(self.variables.get(left))
+            else:
+                print("variavel nao declarada")
+        if(left > right):
+            return True
+        return False
 
 
     # Visit a parse tree produced by BigTParser#LT.
     def visitLT(self, ctx:BigTParser.LTContext):
-        return self.visitChildren(ctx)
+        right = self.visit(ctx.right)
+        left = self.visit(ctx.left)
+        if(isalpha(right)):
+            if(right in self.variables):
+                right = int(self.variables.get(right))
+            else:
+                print("variavel nao declarada")
+        if(isalpha(left)):
+            if(left in self.variables):
+                left = int(self.variables.get(left))
+            else:
+                print("variavel nao declarada")
+        if(left < right):
+            return True
+        return False
 
 
     # Visit a parse tree produced by BigTParser#GE.
     def visitGE(self, ctx:BigTParser.GEContext):
-        return self.visitChildren(ctx)
+        right = self.visit(ctx.right)
+        left = self.visit(ctx.left)
+        if(isalpha(right)):
+            if(right in self.variables):
+                right = int(self.variables.get(right))
+            else:
+                print("variavel nao declarada")
+        if(isalpha(left)):
+            if(left in self.variables):
+                left = int(self.variables.get(left))
+            else:
+                print("variavel nao declarada")
+        if(left >= right):
+            return True
+        return False
 
 
     # Visit a parse tree produced by BigTParser#LE.
     def visitLE(self, ctx:BigTParser.LEContext):
-        return self.visitChildren(ctx)
+        right = self.visit(ctx.right)
+        left = self.visit(ctx.left)
+        if(isalpha(right)):
+            if(right in self.variables):
+                right = int(self.variables.get(right))
+            else:
+                print("variavel nao declarada")
+        if(isalpha(left)):
+            if(left in self.variables):
+                left = int(self.variables.get(left))
+            else:
+                print("variavel nao declarada")
+        if(left <= right):
+            return True
+        return False
 
 
     # Visit a parse tree produced by BigTParser#EQ.
     def visitEQ(self, ctx:BigTParser.EQContext):
-        return self.visitChildren(ctx)
+        right = self.visit(ctx.right)
+        left = self.visit(ctx.left)
+        if(isalpha(right)):
+            if(right in self.variables):
+                right = int(self.variables.get(right))
+            else:
+                print("variavel nao declarada")
+        if(isalpha(left)):
+            if(left in self.variables):
+                left = int(self.variables.get(left))
+            else:
+                print("variavel nao declarada")
+        if(left == right):
+            return True
+        return False
 
 
     # Visit a parse tree produced by BigTParser#comparador_rep.
