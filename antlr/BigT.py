@@ -16,9 +16,11 @@ def main(argv):
     stream = CommonTokenStream(lexer)
     parser = BigTParser(stream)
     tree = parser.start()
-
-    visitor = BigTVisitor()
-    visitor.visit(tree)
+    if parser.getNumberOfSyntaxErrors() > 0:
+        print("erro de sintaxe")
+    else:
+        visitor = BigTVisitor()
+        visitor.visit(tree)
 
 if __name__ == '__main__':
     main(sys.argv)
