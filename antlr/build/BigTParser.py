@@ -196,14 +196,6 @@ class BigTParser ( Parser ):
         def getRuleIndex(self):
             return BigTParser.RULE_start
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterStart" ):
-                listener.enterStart(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitStart" ):
-                listener.exitStart(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitStart" ):
                 return visitor.visitStart(self)
@@ -249,14 +241,6 @@ class BigTParser ( Parser ):
 
         def getRuleIndex(self):
             return BigTParser.RULE_programa_minipar
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterPrograma_minipar" ):
-                listener.enterPrograma_minipar(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitPrograma_minipar" ):
-                listener.exitPrograma_minipar(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitPrograma_minipar" ):
@@ -312,14 +296,6 @@ class BigTParser ( Parser ):
 
         def getRuleIndex(self):
             return BigTParser.RULE_bloco_stmt
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterBloco_stmt" ):
-                listener.enterBloco_stmt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitBloco_stmt" ):
-                listener.exitBloco_stmt(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitBloco_stmt" ):
@@ -385,14 +361,6 @@ class BigTParser ( Parser ):
 
         def getRuleIndex(self):
             return BigTParser.RULE_bloco_seq
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterBloco_seq" ):
-                listener.enterBloco_seq(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitBloco_seq" ):
-                listener.exitBloco_seq(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitBloco_seq" ):
@@ -460,14 +428,6 @@ class BigTParser ( Parser ):
 
         def getRuleIndex(self):
             return BigTParser.RULE_bloco_par
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterBloco_par" ):
-                listener.enterBloco_par(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitBloco_par" ):
-                listener.exitBloco_par(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitBloco_par" ):
@@ -553,14 +513,6 @@ class BigTParser ( Parser ):
         def ENDLINE(self):
             return self.getToken(BigTParser.ENDLINE, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterChan" ):
-                listener.enterChan(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitChan" ):
-                listener.exitChan(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitChan" ):
                 return visitor.visitChan(self)
@@ -638,14 +590,6 @@ class BigTParser ( Parser ):
         def ENDLINE(self):
             return self.getToken(BigTParser.ENDLINE, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterPrin" ):
-                listener.enterPrin(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitPrin" ):
-                listener.exitPrin(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitPrin" ):
                 return visitor.visitPrin(self)
@@ -714,14 +658,6 @@ class BigTParser ( Parser ):
 
         def getRuleIndex(self):
             return BigTParser.RULE_funcao
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterFuncao" ):
-                listener.enterFuncao(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitFuncao" ):
-                listener.exitFuncao(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitFuncao" ):
@@ -803,14 +739,6 @@ class BigTParser ( Parser ):
         def getRuleIndex(self):
             return BigTParser.RULE_atribuicao
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAtribuicao" ):
-                listener.enterAtribuicao(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAtribuicao" ):
-                listener.exitAtribuicao(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAtribuicao" ):
                 return visitor.visitAtribuicao(self)
@@ -882,14 +810,6 @@ class BigTParser ( Parser ):
             return self.getTypedRuleContext(BigTParser.ComparacaoContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterComp" ):
-                listener.enterComp(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitComp" ):
-                listener.exitComp(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitComp" ):
                 return visitor.visitComp(self)
@@ -906,14 +826,6 @@ class BigTParser ( Parser ):
         def funcao(self):
             return self.getTypedRuleContext(BigTParser.FuncaoContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterFunc" ):
-                listener.enterFunc(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitFunc" ):
-                listener.exitFunc(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitFunc" ):
@@ -932,14 +844,6 @@ class BigTParser ( Parser ):
             return self.getTypedRuleContext(BigTParser.RepeticaoContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterRep" ):
-                listener.enterRep(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitRep" ):
-                listener.exitRep(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitRep" ):
                 return visitor.visitRep(self)
@@ -956,14 +860,6 @@ class BigTParser ( Parser ):
         def atribuicao(self):
             return self.getTypedRuleContext(BigTParser.AtribuicaoContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAtr" ):
-                listener.enterAtr(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAtr" ):
-                listener.exitAtr(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAtr" ):
@@ -1042,14 +938,6 @@ class BigTParser ( Parser ):
         def getRuleIndex(self):
             return BigTParser.RULE_args
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterArgs" ):
-                listener.enterArgs(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitArgs" ):
-                listener.exitArgs(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitArgs" ):
                 return visitor.visitArgs(self)
@@ -1124,14 +1012,6 @@ class BigTParser ( Parser ):
 
         def getRuleIndex(self):
             return BigTParser.RULE_comparacao
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterComparacao" ):
-                listener.enterComparacao(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitComparacao" ):
-                listener.exitComparacao(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitComparacao" ):
@@ -1231,14 +1111,6 @@ class BigTParser ( Parser ):
         def getRuleIndex(self):
             return BigTParser.RULE_comparacao_comp
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterComparacao_comp" ):
-                listener.enterComparacao_comp(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitComparacao_comp" ):
-                listener.exitComparacao_comp(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitComparacao_comp" ):
                 return visitor.visitComparacao_comp(self)
@@ -1322,14 +1194,6 @@ class BigTParser ( Parser ):
         def getRuleIndex(self):
             return BigTParser.RULE_repeticao
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterRepeticao" ):
-                listener.enterRepeticao(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitRepeticao" ):
-                listener.exitRepeticao(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitRepeticao" ):
                 return visitor.visitRepeticao(self)
@@ -1397,24 +1261,18 @@ class BigTParser ( Parser ):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a BigTParser.ExprContext
             super().__init__(parser)
+            self.left = None # ExprContext
+            self.right = None # ExprContext
             self.copyFrom(ctx)
 
+        def DIV(self):
+            return self.getToken(BigTParser.DIV, 0)
         def expr(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(BigTParser.ExprContext)
             else:
                 return self.getTypedRuleContext(BigTParser.ExprContext,i)
 
-        def DIV(self):
-            return self.getToken(BigTParser.DIV, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDIV" ):
-                listener.enterDIV(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDIV" ):
-                listener.exitDIV(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDIV" ):
@@ -1427,24 +1285,18 @@ class BigTParser ( Parser ):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a BigTParser.ExprContext
             super().__init__(parser)
+            self.left = None # ExprContext
+            self.right = None # ExprContext
             self.copyFrom(ctx)
 
+        def ADD(self):
+            return self.getToken(BigTParser.ADD, 0)
         def expr(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(BigTParser.ExprContext)
             else:
                 return self.getTypedRuleContext(BigTParser.ExprContext,i)
 
-        def ADD(self):
-            return self.getToken(BigTParser.ADD, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterADD" ):
-                listener.enterADD(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitADD" ):
-                listener.exitADD(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitADD" ):
@@ -1457,24 +1309,18 @@ class BigTParser ( Parser ):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a BigTParser.ExprContext
             super().__init__(parser)
+            self.left = None # ExprContext
+            self.right = None # ExprContext
             self.copyFrom(ctx)
 
+        def SUB(self):
+            return self.getToken(BigTParser.SUB, 0)
         def expr(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(BigTParser.ExprContext)
             else:
                 return self.getTypedRuleContext(BigTParser.ExprContext,i)
 
-        def SUB(self):
-            return self.getToken(BigTParser.SUB, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSUB" ):
-                listener.enterSUB(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSUB" ):
-                listener.exitSUB(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitSUB" ):
@@ -1487,24 +1333,18 @@ class BigTParser ( Parser ):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a BigTParser.ExprContext
             super().__init__(parser)
+            self.left = None # ExprContext
+            self.right = None # ExprContext
             self.copyFrom(ctx)
 
+        def MUL(self):
+            return self.getToken(BigTParser.MUL, 0)
         def expr(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(BigTParser.ExprContext)
             else:
                 return self.getTypedRuleContext(BigTParser.ExprContext,i)
 
-        def MUL(self):
-            return self.getToken(BigTParser.MUL, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterMUL" ):
-                listener.enterMUL(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitMUL" ):
-                listener.exitMUL(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitMUL" ):
@@ -1522,14 +1362,6 @@ class BigTParser ( Parser ):
         def fator(self):
             return self.getTypedRuleContext(BigTParser.FatorContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSimpleAtr2" ):
-                listener.enterSimpleAtr2(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSimpleAtr2" ):
-                listener.exitSimpleAtr2(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitSimpleAtr2" ):
@@ -1551,14 +1383,6 @@ class BigTParser ( Parser ):
 
         def FP(self):
             return self.getToken(BigTParser.FP, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterParenexprParen" ):
-                listener.enterParenexprParen(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitParenexprParen" ):
-                listener.exitParenexprParen(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitParenexprParen" ):
@@ -1616,6 +1440,7 @@ class BigTParser ( Parser ):
                     la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
                     if la_ == 1:
                         localctx = BigTParser.MULContext(self, BigTParser.ExprContext(self, _parentctx, _parentState))
+                        localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
                         self.state = 177
                         if not self.precpred(self._ctx, 4):
@@ -1624,11 +1449,12 @@ class BigTParser ( Parser ):
                         self.state = 178
                         self.match(BigTParser.MUL)
                         self.state = 179
-                        self.expr(5)
+                        localctx.right = self.expr(5)
                         pass
 
                     elif la_ == 2:
                         localctx = BigTParser.DIVContext(self, BigTParser.ExprContext(self, _parentctx, _parentState))
+                        localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
                         self.state = 180
                         if not self.precpred(self._ctx, 3):
@@ -1637,11 +1463,12 @@ class BigTParser ( Parser ):
                         self.state = 181
                         self.match(BigTParser.DIV)
                         self.state = 182
-                        self.expr(4)
+                        localctx.right = self.expr(4)
                         pass
 
                     elif la_ == 3:
                         localctx = BigTParser.ADDContext(self, BigTParser.ExprContext(self, _parentctx, _parentState))
+                        localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
                         self.state = 183
                         if not self.precpred(self._ctx, 2):
@@ -1650,11 +1477,12 @@ class BigTParser ( Parser ):
                         self.state = 184
                         self.match(BigTParser.ADD)
                         self.state = 185
-                        self.expr(3)
+                        localctx.right = self.expr(3)
                         pass
 
                     elif la_ == 4:
                         localctx = BigTParser.SUBContext(self, BigTParser.ExprContext(self, _parentctx, _parentState))
+                        localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
                         self.state = 186
                         if not self.precpred(self._ctx, 1):
@@ -1663,7 +1491,7 @@ class BigTParser ( Parser ):
                         self.state = 187
                         self.match(BigTParser.SUB)
                         self.state = 188
-                        self.expr(2)
+                        localctx.right = self.expr(2)
                         pass
 
              
@@ -1703,14 +1531,6 @@ class BigTParser ( Parser ):
 
         def getRuleIndex(self):
             return BigTParser.RULE_comparador
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterComparador" ):
-                listener.enterComparador(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitComparador" ):
-                listener.exitComparador(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitComparador" ):
@@ -1772,24 +1592,18 @@ class BigTParser ( Parser ):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a BigTParser.Comparador_compContext
             super().__init__(parser)
+            self.left = None # ExprContext
+            self.right = None # ExprContext
             self.copyFrom(ctx)
 
+        def LT(self):
+            return self.getToken(BigTParser.LT, 0)
         def expr(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(BigTParser.ExprContext)
             else:
                 return self.getTypedRuleContext(BigTParser.ExprContext,i)
 
-        def LT(self):
-            return self.getToken(BigTParser.LT, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterLT" ):
-                listener.enterLT(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitLT" ):
-                listener.exitLT(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLT" ):
@@ -1802,24 +1616,18 @@ class BigTParser ( Parser ):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a BigTParser.Comparador_compContext
             super().__init__(parser)
+            self.left = None # ExprContext
+            self.right = None # ExprContext
             self.copyFrom(ctx)
 
+        def LE(self):
+            return self.getToken(BigTParser.LE, 0)
         def expr(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(BigTParser.ExprContext)
             else:
                 return self.getTypedRuleContext(BigTParser.ExprContext,i)
 
-        def LE(self):
-            return self.getToken(BigTParser.LE, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterLE" ):
-                listener.enterLE(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitLE" ):
-                listener.exitLE(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLE" ):
@@ -1832,24 +1640,18 @@ class BigTParser ( Parser ):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a BigTParser.Comparador_compContext
             super().__init__(parser)
+            self.left = None # ExprContext
+            self.right = None # ExprContext
             self.copyFrom(ctx)
 
+        def EQ(self):
+            return self.getToken(BigTParser.EQ, 0)
         def expr(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(BigTParser.ExprContext)
             else:
                 return self.getTypedRuleContext(BigTParser.ExprContext,i)
 
-        def EQ(self):
-            return self.getToken(BigTParser.EQ, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterEQ" ):
-                listener.enterEQ(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitEQ" ):
-                listener.exitEQ(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitEQ" ):
@@ -1862,24 +1664,18 @@ class BigTParser ( Parser ):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a BigTParser.Comparador_compContext
             super().__init__(parser)
+            self.left = None # ExprContext
+            self.right = None # ExprContext
             self.copyFrom(ctx)
 
+        def GT(self):
+            return self.getToken(BigTParser.GT, 0)
         def expr(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(BigTParser.ExprContext)
             else:
                 return self.getTypedRuleContext(BigTParser.ExprContext,i)
 
-        def GT(self):
-            return self.getToken(BigTParser.GT, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterGT" ):
-                listener.enterGT(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitGT" ):
-                listener.exitGT(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitGT" ):
@@ -1892,24 +1688,18 @@ class BigTParser ( Parser ):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a BigTParser.Comparador_compContext
             super().__init__(parser)
+            self.left = None # ExprContext
+            self.right = None # ExprContext
             self.copyFrom(ctx)
 
+        def GE(self):
+            return self.getToken(BigTParser.GE, 0)
         def expr(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(BigTParser.ExprContext)
             else:
                 return self.getTypedRuleContext(BigTParser.ExprContext,i)
 
-        def GE(self):
-            return self.getToken(BigTParser.GE, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterGE" ):
-                listener.enterGE(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitGE" ):
-                listener.exitGE(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitGE" ):
@@ -1931,55 +1721,55 @@ class BigTParser ( Parser ):
                 localctx = BigTParser.GTContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
                 self.state = 203
-                self.expr(0)
+                localctx.left = self.expr(0)
                 self.state = 204
                 self.match(BigTParser.GT)
                 self.state = 205
-                self.expr(0)
+                localctx.right = self.expr(0)
                 pass
 
             elif la_ == 2:
                 localctx = BigTParser.LTContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
                 self.state = 207
-                self.expr(0)
+                localctx.left = self.expr(0)
                 self.state = 208
                 self.match(BigTParser.LT)
                 self.state = 209
-                self.expr(0)
+                localctx.right = self.expr(0)
                 pass
 
             elif la_ == 3:
                 localctx = BigTParser.GEContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
                 self.state = 211
-                self.expr(0)
+                localctx.left = self.expr(0)
                 self.state = 212
                 self.match(BigTParser.GE)
                 self.state = 213
-                self.expr(0)
+                localctx.right = self.expr(0)
                 pass
 
             elif la_ == 4:
                 localctx = BigTParser.LEContext(self, localctx)
                 self.enterOuterAlt(localctx, 4)
                 self.state = 215
-                self.expr(0)
+                localctx.left = self.expr(0)
                 self.state = 216
                 self.match(BigTParser.LE)
                 self.state = 217
-                self.expr(0)
+                localctx.right = self.expr(0)
                 pass
 
             elif la_ == 5:
                 localctx = BigTParser.EQContext(self, localctx)
                 self.enterOuterAlt(localctx, 5)
                 self.state = 219
-                self.expr(0)
+                localctx.left = self.expr(0)
                 self.state = 220
                 self.match(BigTParser.EQ)
                 self.state = 221
-                self.expr(0)
+                localctx.right = self.expr(0)
                 pass
 
 
@@ -2007,14 +1797,6 @@ class BigTParser ( Parser ):
 
         def getRuleIndex(self):
             return BigTParser.RULE_comparador_rep
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterComparador_rep" ):
-                listener.enterComparador_rep(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitComparador_rep" ):
-                listener.exitComparador_rep(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitComparador_rep" ):
@@ -2065,14 +1847,6 @@ class BigTParser ( Parser ):
 
         def getRuleIndex(self):
             return BigTParser.RULE_fator
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterFator" ):
-                listener.enterFator(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitFator" ):
-                listener.exitFator(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitFator" ):
@@ -2126,14 +1900,6 @@ class BigTParser ( Parser ):
         def getRuleIndex(self):
             return BigTParser.RULE_int
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterInt" ):
-                listener.enterInt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitInt" ):
-                listener.exitInt(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitInt" ):
                 return visitor.visitInt(self)
@@ -2172,14 +1938,6 @@ class BigTParser ( Parser ):
 
         def getRuleIndex(self):
             return BigTParser.RULE_id
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterId" ):
-                listener.enterId(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitId" ):
-                listener.exitId(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitId" ):

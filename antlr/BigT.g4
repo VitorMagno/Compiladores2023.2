@@ -27,18 +27,18 @@ comparacao_comp:    IF AP comparador FP AC stmts* FC;
 repeticao:          WHILE AP comparador FP AC stmts* FC; 
 expr:            fator            # simpleAtr2
     |            AP expr FP       # ParenexprParen
-    |            expr MUL expr    # MUL
-    |            expr DIV expr    # DIV
-    |            expr ADD expr    # ADD
-    |            expr SUB expr    # SUB 
+    |            left=expr MUL right=expr    # MUL
+    |            left=expr DIV right=expr    # DIV
+    |            left=expr ADD right=expr    # ADD
+    |            left=expr SUB right=expr    # SUB 
     ;
 comparador:      comparador_comp (comparador_rep comparador_comp)*
     ;
-comparador_comp:    expr GT expr     # GT                             
-    |               expr LT expr     # LT 
-    |               expr GE expr     # GE 
-    |               expr LE expr     # LE 
-    |               expr EQ expr     # EQ 
+comparador_comp:    left=expr GT right=expr     # GT                             
+    |               left=expr LT right=expr     # LT 
+    |               left=expr GE right=expr     # GE 
+    |               left=expr LE right=expr     # LE 
+    |               left=expr EQ right=expr     # EQ 
     ;
 comparador_rep: AND | OR ;
 fator:    int                         
