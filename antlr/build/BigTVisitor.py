@@ -15,9 +15,7 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#start.
     def visitStart(self, ctx:BigTParser.StartContext):
-        for i in range(0, ctx.getChildCount(), 1):
-            print(self.visit(ctx.getChild(i)))
-        return 0
+        return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by BigTParser#programa_minipar.
@@ -41,7 +39,7 @@ class BigTVisitor(ParseTreeVisitor):
 
 
     # Visit a parse tree produced by BigTParser#chan.
-    def visitChan(self, ctx:BigTParser.ChanContext):
+    def visitChan(self, ctx:BigTParser.ChanContext): #sockets
         return self.visitChildren(ctx)
 
 
@@ -58,8 +56,8 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#atribuicao.
     def visitAtribuicao(self, ctx:BigTParser.AtribuicaoContext):
-        idatual = self.visitChildren(ctx.id())
-        if(ctx.expr() != None):
+        idatual = self.visitChildren(ctx.id_())
+        if(self.visitChildren(ctx.expr()) != None):
             expratual=self.visitChildren(ctx.expr())
             if(idatual not in self.variables.keys()):
                 self.variables[idatual] = expratual
@@ -103,16 +101,16 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#comparacao_comp.
     def visitComparacao_comp(self, ctx:BigTParser.Comparacao_compContext):
-        result = self.visitComparador()
+        result = self.visitChildren(ctx.comparador())
         if(result == True):
-            return self.visitChildren(ctx.stmts)
+            return self.visitChildren(ctx.stmts())
         return 
 
 
 
     # Visit a parse tree produced by BigTParser#repeticao.
     def visitRepeticao(self, ctx:BigTParser.RepeticaoContext):
-        while(ctx.comparador() == True):
+        while(self.visitChildren(ctx.comparador()) == True):
             return self.visitChildren(ctx.stmts())
         return
 
@@ -131,24 +129,24 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#ADD.
     def visitADD(self, ctx:BigTParser.ADDContext):
-        left = ctx.expr(0)
-        right = ctx.expr(1)
+        left = self.visitChildren(ctx.expr(0))
+        right = self.visitChildren(ctx.expr(1))
         resultado = left+right
         return resultado
 
 
     # Visit a parse tree produced by BigTParser#SUB.
     def visitSUB(self, ctx:BigTParser.SUBContext):
-        left = ctx.expr(0)
-        right = ctx.expr(1)
+        left = self.visitChildren(ctx.expr(0))
+        right = self.visitChildren(ctx.expr(1))
         resultado = left-right
         return resultado
 
 
     # Visit a parse tree produced by BigTParser#MUL.
     def visitMUL(self, ctx:BigTParser.MULContext):
-        left = ctx.expr(0)
-        right = ctx.expr(1)
+        left = self.visitChildren(ctx.expr(0))
+        right = self.visitChildren(ctx.expr(1))
         resultado = left*right
         return resultado
 
@@ -170,8 +168,8 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#GT.
     def visitGT(self, ctx:BigTParser.GTContext):
-        left = ctx.expr(0)
-        right = ctx.expr(1)
+        left = self.visitChildren(ctx.expr(0))
+        right = self.visitChildren(ctx.expr(1))
         if (left > right):
             return True
         return False
@@ -179,8 +177,8 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#LT.
     def visitLT(self, ctx:BigTParser.LTContext):
-        left = ctx.expr(0)
-        right = ctx.expr(1)
+        left = self.visitChildren(ctx.expr(0))
+        right = self.visitChildren(ctx.expr(1))
         if (left < right):
             return True
         return False
@@ -188,8 +186,8 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#GE.
     def visitGE(self, ctx:BigTParser.GEContext):
-        left = ctx.expr(0)
-        right = ctx.expr(1)
+        left = self.visitChildren(ctx.expr(0))
+        right = self.visitChildren(ctx.expr(1))
         if (left >= right):
             return True
         return False
@@ -197,8 +195,8 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#LE.
     def visitLE(self, ctx:BigTParser.LEContext):
-        left = ctx.expr(0)
-        right = ctx.expr(1)
+        left = self.visitChildren(ctx.expr(0))
+        right = self.visitChildren(ctx.expr(1))
         if (left <= right):
             return True
         return False
@@ -206,8 +204,8 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#EQ.
     def visitEQ(self, ctx:BigTParser.EQContext):
-        left = ctx.expr(0)
-        right = ctx.expr(1)
+        left = self.visitChildren(ctx.expr(0))
+        right = self.visitChildren(ctx.expr(1))
         if (left == right):
             return True
         return False
