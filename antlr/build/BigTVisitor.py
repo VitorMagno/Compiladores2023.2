@@ -44,7 +44,7 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#prin.
     def visitPrin(self, ctx:BigTParser.PrinContext):
-        name = self.visit(ctx.id())
+        name = self.visit(ctx.id_())
         if(name not in self.variables):
             print("variavel nao declarada")
         else:
@@ -60,12 +60,11 @@ class BigTVisitor(ParseTreeVisitor):
     # Visit a parse tree produced by BigTParser#atribuicao.
     def visitAtribuicao(self, ctx:BigTParser.AtribuicaoContext):
         variavel = self.visit(ctx.id_())
-        valor
         if(ctx.expr() != None):
-            valor = self.visit(ctx.expr())
+            self.variables[variavel] = self.visit(ctx.expr())
         else:
-            valor = self.visit(ctx.comparador())
-        return 
+            self.variables[variavel] = self.visit(ctx.comparador())
+        return
 
 
     # Visit a parse tree produced by BigTParser#atr.
@@ -110,34 +109,33 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#DIV.
     def visitDIV(self, ctx:BigTParser.DIVContext):
-        right = int(ctx.right().getText())
-        left = int(ctx.left().getText())
+        right = int(self.visit(ctx.right))
+        left = int(self.visit(ctx.left))
         if(left != 0):
-            return left/right
+            return left / right
         else:
             print("divisao por 0")
         return
 
-
     # Visit a parse tree produced by BigTParser#ADD.
     def visitADD(self, ctx:BigTParser.ADDContext):
-        right = int(ctx.right().getText())
-        left = int(ctx.left().getText())
-        return right+left
+        right = int(self.visit(ctx.right))
+        left = int(self.visit(ctx.left))
+        return right + left
 
 
     # Visit a parse tree produced by BigTParser#SUB.
     def visitSUB(self, ctx:BigTParser.SUBContext):
-        right = int(ctx.right().getText())
-        left = int(ctx.left().getText())
-        return right-left
+        right = int(self.visit(ctx.right))
+        left = int(self.visit(ctx.left))
+        return right - left
 
 
     # Visit a parse tree produced by BigTParser#MUL.
     def visitMUL(self, ctx:BigTParser.MULContext):
-        right = int(ctx.right().getText())
-        left = int(ctx.left().getText())
-        return right*left
+        right = int(self.visit(ctx.right))
+        left = int(self.visit(ctx.left))
+        return right * left
 
 
     # Visit a parse tree produced by BigTParser#simpleAtr2.
@@ -192,13 +190,13 @@ class BigTVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BigTParser#int.
     def visitInt(self, ctx:BigTParser.IntContext):
-        value = ctx.getText()
+        value = ctx.INTEGER().getText()
         return value
 
 
     # Visit a parse tree produced by BigTParser#id.
     def visitId(self, ctx:BigTParser.IdContext):
-        name = ctx.getText()
+        name = ctx.ID().getText()
         return name
 
 
