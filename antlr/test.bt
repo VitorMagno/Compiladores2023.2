@@ -1,7 +1,36 @@
 SEQ{
-    chan(localhost, cliente, servidor);
-    b = 10;
-    a=90;
-    a=b+a;
-    print(a);
+    n = 5;
+    i = 1;
+    r = 1;
+}
+SEQ{   
+    i=1;
+    n=3;
+    while(i<=n){ 
+        r = r * 1;
+        print(r);
+        i=i+1;
+    }
+}     
+SEQ {
+    n = 3;
+    i = 1;
+    a = 0;
+    u = 1;
+    p = 0;
+    while(i < n){
+        if(i == 1){
+            print(u);
+            a = u;
+            p = u + a;
+        }else{
+            print(u);
+            print(a);
+            print(p);
+            t = p;
+            p = u + a;
+            a = u;
+            u = t;
+        }
+    }
 }
