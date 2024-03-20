@@ -4,8 +4,8 @@ start: programa_minipar
     ;
 programa_minipar:	bloco_stmt* EOF
             ;
-bloco_stmt:         bloco_seq
-        |           bloco_par
+bloco_stmt:         bloco_seq+
+        |           bloco_par+
         ;
 bloco_seq:          SEQ AC stmts* FC;
 bloco_par:          PAR AC stmts* FC;
